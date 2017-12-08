@@ -1,0 +1,23 @@
+Outstanding TODOs in no particular order
+----------------------------------------
+* Add wcs_trim; wcs_skip; etc. to library
+* Add str_xcpy; str_xcat; etc. to library
+* Add tests (build, install?)
+* Add example programs (install?)
+* Add examples in man pages
+
+
+Deferred:
+---------
+
+
+Implemented:
+------------
+* Makefile rules to (un)install docs [UW 12/2017]
+* Retrofit inline documentation into logprintf.[ch] [UW 12/2017]
+* Add htobeXX, htoleXX, betohXX, letohXX to bendian.[ch] [UW 12/2017]
+* Extract documentation from source files with awk, sed, txt2man [UW 12/2017]
+
+
+Rejected:
+---------
