@@ -1,0 +1,6 @@
+# ignore generated text files and man pages
+/*.txt
+/*.[12345678]
+
+# except foo.txt which is maintained by hand
+# !/foo.txt

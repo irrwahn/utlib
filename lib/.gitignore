@@ -1,0 +1,8 @@
+# ignore any (shared) objects and archives
+*.so.[[:digit:]]*
+*.[oa]
+
+# ignore generated files
+*.d
+str_all.h
+version.h
