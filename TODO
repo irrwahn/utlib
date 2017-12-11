@@ -2,12 +2,16 @@ Outstanding TODOs in no particular order
 ----------------------------------------
 * Add URL encode/decode
 * Add string (un)escape
-* Add utf8 utility functions
 * Add wcs_trim; wcs_skip; etc. to library?
 * Add str_xcpy; str_xcat; etc. to library
 * Add tests (build, install?)
 * Add example programs (install?)
 * Add examples in man pages
+
+
+WiP:
+----
+* Add utf8 utility functions
 
 
 Deferred:
