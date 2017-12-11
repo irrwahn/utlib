@@ -288,7 +288,7 @@ size_t utf8_mem_decode( uint32_t *buf, size_t max, void *s, size_t size, size_t 
  ** 	}
  **
  ** 	int put( uint32_t cp, void *usr ) {
- ** 	    return printf( "U+%04X\n", cp );
+ ** 	    return printf( "U+%04lX\n", (unsigned long)cp );
  ** 	}
  **
  ** 	int main( void )
