@@ -42,10 +42,13 @@ export $(PROJECT)_VERSION := $(VER_MJR).$(VER_MNR).$(VER_INC)
 export $(PROJECT)_REVISION := $(VER_REV)
 
 export MAKE_DEPTH := 1
-export LDIR       := lib
-export DDIR       := doc
 
-SELF    := $(lastword $(MAKEFILE_LIST))
+SELF := $(lastword $(MAKEFILE_LIST))
+export PRJDIR     := $(dir $(realpath $(SELF)))
+export LIBDIR     := $(PRJDIR)/lib
+export DOCDIR     := $(PRJDIR)/doc
+export TSTDIR     := $(PRJDIR)/test
+
 BLDCFG  := config.mk
 DEFCFG  := config.def.mk
 DOCX    := BUGS CREDITS LICENSE README.md TODO
@@ -58,15 +61,15 @@ release: CFLAGS += $(CRFLAGS) $(RLS_OPT)
 debug:   CFLAGS += $(CDFLAGS) $(DBG_OPT)
 release debug:
 	@echo $@ build, version [$($(PROJECT)_VERSION)], revision [$($(PROJECT)_REVISION)]
-	$(MAKE) -C $(LDIR) $@
-	$(MAKE) -C $(DDIR) $@
+	$(MAKE) -C $(LIBDIR) $@
+	$(MAKE) -C $(DOCDIR) $@
 
 doc:
-	$(MAKE) -C $(LDIR) $@
-	$(MAKE) -C $(DDIR) $@
+	$(MAKE) -C $(LIBDIR) $@
+	$(MAKE) -C $(DOCDIR) $@
 
 test:
-	@echo "TODO: build & run tests"
+	$(MAKE) -C $(TSTDIR) $@
 
 tarball:
 	$(eval TARNAME := $(PROJECT)-$($(PROJECT)_VERSION)-$($(PROJECT)_REVISION))
@@ -74,25 +77,29 @@ tarball:
 
 install: release
 	@echo Installing to $(INST_PREFIX) ...
-	$(MAKE) -C $(LDIR) $@
-	$(MAKE) -C $(DDIR) $@
+	$(MAKE) -C $(LIBDIR) $@
+	$(MAKE) -C $(DOCDIR) $@
+	$(MAKE) -C $(TSTDIR) $@
 	@echo Installing extra documents ...
 	@$(MKDIR) $(INST_DOCDIR) && for f in $(DOCX); do $(CPV) $$f $(INST_DOCDIR) ; done ||:
 
 uninstall:
 	@echo Uninstalling from $(INST_PREFIX) ...
-	$(MAKE) -C $(LDIR) $@
-	$(MAKE) -C $(DDIR) $@
+	$(MAKE) -C $(LIBDIR) $@
+	$(MAKE) -C $(DOCDIR) $@
+	$(MAKE) -C $(TSTDIR) $@
 	@echo Removing extra documents ...
 	@cd $(INST_DOCDIR) && for f in $(DOCX); do $(RMV) $$f ; done && $(RMDIR) $(INST_DOCDIR) ||:
 
 clean:
-	$(MAKE) -C $(LDIR) $@
-	$(MAKE) -C $(DDIR) $@
+	$(MAKE) -C $(LIBDIR) $@
+	$(MAKE) -C $(DOCDIR) $@
+	$(MAKE) -C $(TSTDIR) $@
 
 distclean: clean
-	$(MAKE) -C $(LDIR) $@
-	$(MAKE) -C $(DDIR) $@
+	$(MAKE) -C $(LIBDIR) $@
+	$(MAKE) -C $(DOCDIR) $@
+	$(MAKE) -C $(TSTDIR) $@
 	$(RM) $(BLDCFG) *.tar.gz
 
 $(BLDCFG) config:

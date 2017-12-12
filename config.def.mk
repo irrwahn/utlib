@@ -50,6 +50,7 @@ export TOUCH   := touch
 export LN      := ln -sf
 export FIND    := find
 export AWK     := awk
+export GREP    := grep
 export SED     := sed
 export BASENAME:= basename
 export CUT     := cut

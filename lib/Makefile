@@ -51,14 +51,12 @@ DEP   := $(OBJ:%.o=%.d)
 VER_H := version.h
 STR_H := str_all.h
 
-release debug: gen $(OBJ) $(SELF)
+release debug: $(VER_H) $(STR_H) $(OBJ) $(SELF)
 	$(AR) -rs $(ARNAME) $(OBJ)
 	$(CCSO) -Wl,-soname,$(SONAME) -o $(SONAME_XXX) $(OBJ)
 
 %.o: %.c $(SELF)
 	$(CC) -c $(CFLAGS) $(CSFLAGS) -o $*.o $*.c
-
-gen: $(VER_H) $(STR_H)
 
 $(VER_H): $(SELF)
 	@echo "#define UTLIB_VERSION       \"$($(PROJECT)_VERSION)\"" > $(VER_H)
@@ -75,8 +73,7 @@ $(STR_H): $(SELF)
 
 doc: | $(SRC) $(HDR)
 	@echo Extracting manpages from source comments:
-	@$(AWK) '/ \*{4} /{close(f); f="../$(DDIR)/"$$2"."$$3".txt"; print " ", FILENAME, "-->", f} / \*{2}( |$$)/{print $$0 > f}' $(SRC) $(HDR)
-#	@$(AWK) '/ \*{4} /{close(f); f="../$(DDIR)/"$$2"."$$3".txt"; print " ", FILENAME, "-->", f} / \*{2}( |$$)/{$$1=""; $$0=$$0; $$1=$$1; print $$0 > f}' $(SRC) $(HDR)
+	@$(AWK) '/ \*{4} /{close(f); f="$(DOCDIR)/"$$2"."$$3".txt"; print " ", FILENAME, "-->", f} / \*{2}( |$$)/{print $$0 > f}' $(SRC) $(HDR)
 
 install:
 	@$(MKDIR) $(INST_LIBDIR) \
@@ -101,6 +98,6 @@ distclean: clean
 
 -include $(DEP)
 
-.PHONY: release debug doc gen install uninstall clean distclean
+.PHONY: release debug doc install uninstall clean distclean
 
 ## EOF
