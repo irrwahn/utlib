@@ -93,6 +93,7 @@ extern "C" {
 #endif
 
 #include <stdarg.h>
+#include <stdio.h>
 
 /* Supported logging modes. */
 #define LOG_TO_FILE     1
