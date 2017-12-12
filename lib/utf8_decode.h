@@ -47,13 +47,13 @@
  **     UTF_REPLACE_CHAR  Unicode code point used as replacement char
  **
  **   FUNCTIONS
- **    utf8_str_count()  count UTF-8 code points in string
- **    utf8_mem_count()  count UTF-8 code points in memory
+ **     utf8_str_count()  count UTF-8 code points in string
+ **     utf8_mem_count()  count UTF-8 code points in memory
  **
- **    utf8_str_decode() decode UTF-8 code points from string
- **    utf8_mem_decode() decode UTF-8 code points from memory
+ **     utf8_str_decode()  decode UTF-8 code points from string
+ **     utf8_mem_decode()  decode UTF-8 code points from memory
  **
- **    utf8_stream_decode()  call-back driven UTF-8 decoder
+ **     utf8_stream_decode()  call-back driven UTF-8 decoder
  **
  ** SEE ALSO
  **   locale(1), locale(7)
@@ -71,7 +71,7 @@ extern "C" {
 #include <stdlib.h>
 #include <stdint.h>
 
-
+#undef UTF_REPLACE_CHAR
 #define UTF_REPLACE_CHAR    0xFFFD
 
 

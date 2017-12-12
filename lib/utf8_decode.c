@@ -249,7 +249,7 @@ size_t utf8_mem_decode( uint32_t *buf, size_t max, void *s, size_t size, size_t 
  **   supplied call-back functions.
  **
  **   The call-back function pointed to by get is called whenever a new
- **   byte ofinput is required. It shall return an unsigned character
+ **   byte of input is required. It shall return an unsigned character
  **   value cast to an int, or EOF in case an error occurred.
  **   The function pointed to by put is called whenever a Unicode code
  **   point was successfully decoded and is passed that value as argument.
@@ -272,7 +272,7 @@ size_t utf8_mem_decode( uint32_t *buf, size_t max, void *s, size_t size, size_t 
  **
  ** NOTES
  **   For each rejected sequence, utf8_stream_decode() generates the
- **   Unicode replacement character U-FFFD.
+ **   Unicode replacement character U+FFFD.
  **   The utf8_stream_decode() function is not affected by the current
  **   locale setting.
  **
