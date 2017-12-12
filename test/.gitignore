@@ -1,0 +1,4 @@
+# ignore generated files
+*.[do]
+tests.h
+runtests
