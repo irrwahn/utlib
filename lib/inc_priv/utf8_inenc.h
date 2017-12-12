@@ -66,7 +66,7 @@ extern "C" {
 
 #include <stdint.h>
 
-static inline int utf8_ec( uint32_t cp, char *b )
+static inline int utf8_ec( uint32_t cp, uint8_t *b )
 {
     if ( cp < 0x80 )
     {

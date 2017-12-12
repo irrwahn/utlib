@@ -62,12 +62,12 @@
  **   occurred.
  **   The function pointed to by put is called whenever a Unicode code
  **   point was successfully encoded. It is passed the encoding result in
- **   a null terminated character array and an int containing associated
+ **   a null terminated byte array and an int containing associated
  **   length information. It shall return a value greater than or equal
  **   to zero upon success, or a negative value to signal an error
  **   condition. Whenever one of these call-back functions returns a
  **   negative value, utf8_stream_encode() immediately stops processing
- **   and returns thecounts it accumulated so far.
+ **   and returns the counts it accumulated so far.
  **
  **   The user supplied pointer usr is passed to either call-back function
  **   upon each invocation. It can be used to pass context information
@@ -87,8 +87,8 @@
  **   locale setting.
  **
  ** EXAMPLE
- **  The following minimalistic program reads from stdin and prints
- **  UTF-8 codepoints code points in hex notation to stdout:
+ **  The following pretty useless program reads from stdin and prints
+ **  UTF-8 encoded byte sequences to stdout:
  **
  ** 	#include <stdio.h>
  ** 	#include <utf8_encode.h>
@@ -97,8 +97,8 @@
  ** 	    return fgetc( stdin );
  ** 	}
  **
- ** 	int put( char *b, int l, void *usr ) {
- ** 	    return printf( "%s", b );
+ ** 	int put( uint8_t *b, int l, void *usr ) {
+ ** 	    return printf( "%s", (char *)b );
  ** 	}
  **
  ** 	int main( void )
@@ -113,9 +113,9 @@
  **
  */
 
-size_t utf8_stream_encode( uint32_t(*get)(void*), int(*put)(char*,int,void*), void *usr, size_t *errcnt )
+size_t utf8_stream_encode( uint32_t(*get)(void*), int(*put)(uint8_t*,int,void*), void *usr, size_t *errcnt )
 {
-    char b[5];
+    uint8_t b[5];
     int n;
     size_t ok = 0, bad = 0;
     uint32_t cp = 0;
@@ -123,15 +123,12 @@ size_t utf8_stream_encode( uint32_t(*get)(void*), int(*put)(char*,int,void*), vo
     while ( (uint32_t)EOF != ( cp = get( usr ) ) )
     {
         n = utf8_ec( cp, b );
-        if ( 0 != n )
+        if ( 0 < n )
             ++ok;
         else
         {
             ++bad;
-            b[0] = '\xEF';
-            b[1] = '\xBF';
-            b[2] = '\xBD';
-            n = 3;
+            n = utf8_ec( UTF_REPLACE_CHAR, b );
         }
         b[n] = '\0';
         if ( 0 > put( b, n, usr ) )

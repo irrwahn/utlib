@@ -69,7 +69,7 @@ extern "C" {
 #define UTF_REPLACE_CHAR    0xFFFD
 
 
-extern size_t utf8_stream_encode( uint32_t(*get)(void*), int(*put)(char*,int,void*), void *usr, size_t *errcnt );
+extern size_t utf8_stream_encode( uint32_t(*get)(void*), int(*put)(uint8_t*,int,void*), void *usr, size_t *errcnt );
 
 
 #ifdef _cplusplus
