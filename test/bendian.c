@@ -30,38 +30,41 @@ int REGISTER(bendian)( int id )
     MESG( id, "System is %s ENDIAN.", isbe ? "BIG" : "LITTLE" );
     if ( !isbe )
     {
-        if ( letoh16(u.u16) == U16n && letoh32(u.u32) == U32n && letoh64(u.u64) == U64n )
-            PASS( id, "letohNN()" ); else { ++err; FAIL( id, "letohNN()" ); }
-        if ( htole16(u.u16) == U16n && htole32(u.u32) == U32n && htole64(u.u64) == U64n )
-            PASS( id, "htoleNN()" ); else { ++err; FAIL( id, "htoleNN()" ); }
+        if ( letoh16(u.u16) != U16n || letoh32(u.u32) != U32n || letoh64(u.u64) != U64n )
+            { ++err; FAIL( id, "letohNN()" ); }
+        if ( htole16(u.u16) != U16n || htole32(u.u32) != U32n || htole64(u.u64) != U64n )
+            { ++err; FAIL( id, "htoleNN()" ); }
 
-        if ( betoh16(u.u16) == U16 && betoh32(u.u32) == U32 && betoh64(u.u64) == U64 )
-            PASS( id, "betohNN()" ); else { ++err; FAIL( id, "betohNN()" ); }
-        if ( htobe16(u.u16) == U16 && htobe32(u.u32) == U32 && htobe64(u.u64) == U64 )
-            PASS( id, "htobeNN()" ); else { ++err; FAIL( id, "htobeNN()" ); }
+        if ( betoh16(u.u16) != U16 || betoh32(u.u32) != U32 || betoh64(u.u64) != U64 )
+            { ++err; FAIL( id, "betohNN()" ); }
+        if ( htobe16(u.u16) != U16 || htobe32(u.u32) != U32 || htobe64(u.u64) != U64 )
+            { ++err; FAIL( id, "htobeNN()" ); }
 
-        if ( ntoh16(u.u16) == U16 && ntoh32(u.u32) == U32 && ntoh64(u.u64) == U64 )
-            PASS( id, "ntohNN()" ); else { ++err; FAIL( id, "ntohNN()" ); }
-        if ( hton16(u.u16) == U16 && hton32(u.u32) == U32 && hton64(u.u64) == U64 )
-            PASS( id, "htonNN()" ); else { ++err; FAIL( id, "htonNN()" ); }
+        if ( ntoh16(u.u16) != U16 || ntoh32(u.u32) != U32 || ntoh64(u.u64) != U64 )
+            { ++err; FAIL( id, "ntohNN()" ); }
+        if ( hton16(u.u16) != U16 || hton32(u.u32) != U32 || hton64(u.u64) != U64 )
+            { ++err; FAIL( id, "htonNN()" ); }
     }
     else
     {
-        if ( letoh16(u.u16) == U16 && letoh32(u.u32) == U32 && letoh64(u.u64) == U64 )
-            PASS( id, "letohNN()" ); else { ++err; FAIL( id, "letohNN()" ); }
-        if ( htole16(u.u16) == U16 && htole32(u.u32) == U32 && htole64(u.u64) == U64 )
-            PASS( id, "htoleNN()" ); else { ++err; FAIL( id, "htoleNN()" ); }
+        if ( letoh16(u.u16) != U16 || letoh32(u.u32) != U32 || letoh64(u.u64) != U64 )
+            { ++err; FAIL( id, "letohNN()" ); }
+        if ( htole16(u.u16) != U16 || htole32(u.u32) != U32 || htole64(u.u64) != U64 )
+            { ++err; FAIL( id, "htoleNN()" ); }
 
-        if ( betoh16(u.u16) == U16n && betoh32(u.u32) == U32n && betoh64(u.u64) == U64n )
-            PASS( id, "betohNN()" ); else { ++err; FAIL( id, "betohNN()" ); }
-        if ( htobe16(u.u16) == U16n && htobe32(u.u32) == U32n && htobe64(u.u64) == U64n )
-            PASS( id, "htobeNN()" ); else { ++err; FAIL( id, "htobeNN()" ); }
+        if ( betoh16(u.u16) != U16n || betoh32(u.u32) != U32n || betoh64(u.u64) != U64n )
+            { ++err; FAIL( id, "betohNN()" ); }
+        if ( htobe16(u.u16) != U16n || htobe32(u.u32) != U32n || htobe64(u.u64) != U64n )
+            { ++err; FAIL( id, "htobeNN()" ); }
 
-        if ( ntoh16(u.u16) == U16n && ntoh32(u.u32) == U32n && ntoh64(u.u64) == U64n )
-            PASS( id, "ntohNN()" ); else { ++err; FAIL( id, "ntohNN()" ); }
-        if ( hton16(u.u16) == U16n && hton32(u.u32) == U32n && hton64(u.u64) == U64n )
-            PASS( id, "htonNN()" ); else { ++err; FAIL( id, "htonNN()" ); }
+        if ( ntoh16(u.u16) != U16n || ntoh32(u.u32) != U32n || ntoh64(u.u64) != U64n )
+            { ++err; FAIL( id, "ntohNN()" ); }
+        if ( hton16(u.u16) != U16n || hton32(u.u32) != U32n || hton64(u.u64) != U64n )
+            { ++err; FAIL( id, "htonNN()" ); }
     }
+
+    if ( !err )
+        PASS( id, "bendian" );
     return err;
 }
 
