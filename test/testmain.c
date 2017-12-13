@@ -1,15 +1,19 @@
 #include "testmain.h"
+#include "testsupp.h"
 
 int main( int argc, char *argv[] )
 {
     (void)argc;
     (void)argv;
-    int r, cnt = 0;
+    int r, t, errcnt = 0;
 
-    for ( int t = 0; testf[t]; ++t )
+    for ( t = 0; testf[t]; ++t )
     {
         r = testf[t]( t );
-        cnt += !!r;
+        errcnt += !!r;
     }
-    return r;
+    fprintf( stderr, "Total: %d of %d tests failed.\n", errcnt, t );
+    return errcnt;
 }
+
+/* EOF */

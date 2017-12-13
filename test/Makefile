@@ -55,6 +55,8 @@ test: $(BIN)
 
 $(BIN): $(TST_H) $(OBJ) $(SELF)
 	$(LD) -L$(LIBDIR) -o$(BIN) $(OBJ) -lut
+	@echo Running tests
+	@./$(BIN)
 
 %.o: %.c $(SELF)
 	$(CC) -c $(CFLAGS) -I$(LIBDIR) -o $*.o $*.c
@@ -62,7 +64,7 @@ $(BIN): $(TST_H) $(OBJ) $(SELF)
 $(TST_H): $(SRC) $(SELF)
 	@echo "Collecting test modules ..."
 	@echo "/* Generated file, do not edit! */" > $(TST_H)
-	@for f in *.c ; do echo "  $$f"; $(GREP) -o -E 'REGISTER *\( *([^ ]+) *\)' $$f >> $(TST_H); done
+	@for f in $(SRC); do echo "  $$f"; $(GREP) -o -E 'REGISTER *\( *([^ ]+) *\)' $$f >> $(TST_H); done ||:
 	@echo Generated $(TST_H)
 
 install:

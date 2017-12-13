@@ -21,11 +21,13 @@ static struct tstruct {
         "\xEF\xBF\xBF"              /* noncharacter U-FFFF */
         "", 24, 10
     },
-    { NULL, 0, 0 }
+    {
+        NULL, 0, 0
+    }
 };
 
 
-int REGISTER(utf8_test)( int id )
+int REGISTER(utf8_dectest)( int id )
 {
     size_t e, n;
 
@@ -33,9 +35,11 @@ int REGISTER(utf8_test)( int id )
     {
         n = utf8_str_count( tst[i].s, &e );
         if ( n != tst[i].good || e != tst[i].bad )
-            FAIL( id, "" );
+            FAIL( id, "%zu/%zu %zu/%zu", n, tst[i].good, e, tst[i].bad );
         else
-            PASS( id, "" );
+            PASS( id, "%zu/%zu %zu/%zu", n, tst[i].good, e, tst[i].bad );
     }
     return 0;
 }
+
+/* EOF */

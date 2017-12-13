@@ -1,6 +1,20 @@
 #include <stdio.h>
 
-#define PASS(I,M) fprintf( stderr, "#%d Ok: %s.  (%s,%d,%s)\n", (I), (M), __func__, __LINE__, __FILE__ )
-#define FAIL(I,M) fprintf( stderr, "#%d Failed: %s.  (%s,%d,%s) \n", (I), (M), __func__, __LINE__, __FILE__ )
+#define MESG(I,...) do { \
+    fprintf( stderr, "  #%d (%s:%s:%d) ", (I), __FILE__, __func__, __LINE__ ); \
+    fprintf( stderr, __VA_ARGS__ ); fprintf( stderr, "\n" ); \
+    } while (0)
+
+#define PASS(I,...) do { \
+    fprintf( stderr, "  #%d (%s:%s:%d) ", (I), __FILE__, __func__, __LINE__ ); \
+    fprintf( stderr, __VA_ARGS__ ); fprintf( stderr, " [Ok.]\n" ); \
+    } while (0)
+
+#define FAIL(I,...) do { \
+    fprintf( stderr, "  #%d (%s:%s:%d) ", (I), __FILE__, __func__, __LINE__ ); \
+    fprintf( stderr, __VA_ARGS__ ); fprintf( stderr, " [Failed!]\n" ); \
+    } while (0)
 
 #define REGISTER(X) X
+
+/* EOF */
