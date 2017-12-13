@@ -52,11 +52,11 @@ BIN   := runtests
 TST_H := tests.h
 
 test: $(BIN)
+	@echo Running tests
+	@./$(BIN)
 
 $(BIN): $(TST_H) $(OBJ) $(SELF)
 	$(LD) -L$(LIBDIR) -o$(BIN) $(OBJ) -lut
-	@echo Running tests
-	@./$(BIN)
 
 %.o: %.c $(SELF)
 	$(CC) -c $(CFLAGS) -I$(LIBDIR) -o $*.o $*.c

@@ -12,7 +12,10 @@ int main( int argc, char *argv[] )
         r = testf[t]( t );
         errcnt += !!r;
     }
-    fprintf( stderr, "Total: %d of %d tests failed.\n", errcnt, t );
+    if ( errcnt )
+        fprintf( stderr, "%d of %d tests failed!\n", errcnt, t );
+    else
+        fprintf( stderr, "All %d tests succeeded.\n", t );
     return errcnt;
 }
 
