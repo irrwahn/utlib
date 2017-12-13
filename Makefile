@@ -68,7 +68,7 @@ doc:
 	$(MAKE) -C $(LIBDIR) $@
 	$(MAKE) -C $(DOCDIR) $@
 
-test:
+test: lib
 	$(MAKE) -C $(TSTDIR) $@
 
 tarball:
