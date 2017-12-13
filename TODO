@@ -1,10 +1,10 @@
 Outstanding TODOs in no particular order
 ----------------------------------------
+* Add utlib general description man page
 * Add URL encode/decode
 * Add string (un)escape
 * Add wcs_trim; wcs_skip; etc. to library?
 * Add str_xcpy; str_xcat; etc. to library
-* Add tests (build, install?)
 * Add example programs (install?)
 * Add examples in man pages
 
@@ -12,6 +12,7 @@ Outstanding TODOs in no particular order
 WiP:
 ----
 * Add utf8 utility functions
+* Add tests (build, install?)
 
 
 Deferred:
