@@ -8,6 +8,8 @@ config.def.mk
 dist.lst
 version.mk
 doc/Makefile
+lib/inc_priv/utf8_indec.h
+lib/inc_priv/utf8_inenc.h
 lib/Makefile
 lib/bendian.c
 lib/bendian.h
@@ -21,3 +23,17 @@ lib/str_icmp.c
 lib/str_icmp.h
 lib/str_trim.c
 lib/str_trim.h
+lib/utf8_decode.c
+lib/utf8_decode.h
+lib/utf8_encode.c
+lib/utf8_encode.h
+lib/utf8_locale.c
+lib/utf8_locale.h
+test/bendian.c
+test/example.c
+test/Makefile
+test/ntime.c
+test/testmain.c
+test/testmain.h
+test/testsupp.h
+test/utf8.c
