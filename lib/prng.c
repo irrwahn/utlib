@@ -99,9 +99,14 @@ static prng_random_ctx_t ctx_unsafe = PRNG_RANDOM_CTX_INITIALIZER;
  **   This PRNG is a 64-bit three-rotate variety of Bob Jenkins' simple
  **   and fast PRNG, based on the public domain implementation by
  **   Robert J. Jenkins Jr.
- **   Pros:  simple; good average cycle length; decent avalanche; fast mixing
- **   Cons:  conceptually limited to values no wider than 64 bits; not fit for any cryptographic purpose
- **   Info:  http://burtleburtle.net/bob/rand/smallprng.html, https://web.archive.org/web/20151002090926/http://www.burtleburtle.net/bob/rand/smallprng.html
+ **
+ **   Pros: simple; good average cycle length; decent avalanche; fast mixing
+ **
+ **   Cons: conceptually limited to values no wider than 64 bits; not fit for any cryptographic purpose
+ **
+ **   Info: http://burtleburtle.net/bob/rand/smallprng.html
+ **
+ **       https://web.archive.org/web/20170518164425/http://www.burtleburtle.net:80/bob/rand/smallprng.html
  **
  **   It is strongly recommended against using this pseudo random
  **   generator implementation for any cryptographic purpose!
