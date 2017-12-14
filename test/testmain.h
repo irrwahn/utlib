@@ -2,17 +2,16 @@
 
 typedef int (*testf_t)(int);
 
-
 #undef REGISTER
-#define REGISTER(X)     extern int (X)( int );
-    #include "tests.h"
-
+#define REGISTER(X)     extern int X( int );
+#include "tests.h"
 #undef REGISTER
+
+static const testf_t testf[] = {
 #define REGISTER(X)     X,
-    static  testf_t testf[] = {
-        #include "tests.h"
-        NULL
-    };
+#include "tests.h"
 #undef REGISTER
+    NULL
+};
 
 /* EOF */

@@ -52,7 +52,7 @@ BIN   := runtests
 TST_H := tests.h
 
 test: $(BIN)
-	@echo Running tests
+	@echo "Running tests ..."
 	@./$(BIN)
 
 $(BIN): $(TST_H) $(OBJ) $(SELF)
