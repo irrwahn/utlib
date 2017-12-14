@@ -51,11 +51,15 @@ DEP   := $(OBJ:%.o=%.d)
 VER_H := version.h
 STR_H := str_all.h
 
-release debug: $(VER_H) $(STR_H) $(OBJ) $(SELF)
+release debug: $(ARNAME) $(SONAME_XXX)
+
+$(ARNAME): $(OBJ) $(SELF)
 	$(AR) -rs $(ARNAME) $(OBJ)
+
+$(SONAME_XXX): $(OBJ) $(SELF)
 	$(CCSO) -Wl,-soname,$(SONAME) -o $(SONAME_XXX) $(OBJ)
 
-%.o: %.c $(SELF)
+%.o: %.c $(VER_H) $(STR_H) $(SELF)
 	$(CC) -c $(CFLAGS) $(CSFLAGS) -o $*.o $*.c
 
 $(VER_H): $(SELF)
