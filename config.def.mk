@@ -32,7 +32,7 @@ export STRIP   := strip
 export AR      := ar
 
 # Do not edit these flags unless you really know what you're doing!
-export CFLAGS  := -std=c99 -pedantic -Wall -Wextra -MMD -MP
+export CFLAGS  := -std=c99 -pedantic -Wall -Wextra -fstrict-aliasing -MMD -MP
 export CRFLAGS := -O2 -DNDEBUG
 export CDFLAGS := -O0 -DDEBUG -g3 -pg -ggdb
 export CSFLAGS := -I. -fPIC
