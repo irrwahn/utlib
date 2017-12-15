@@ -38,6 +38,9 @@ export LIBNAME    := libut
 export DOCNAME    := Utlib Reference Manual
 
 include version.mk
+export $(PROJECT)_VER_MJR := $(VER_MJR)
+export $(PROJECT)_VER_MNR := $(VER_MNR)
+export $(PROJECT)_VER_INC := $(VER_INC)
 export $(PROJECT)_VERSION := $(VER_MJR).$(VER_MNR).$(VER_INC)
 export $(PROJECT)_REVISION := $(VER_REV)
 

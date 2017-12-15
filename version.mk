@@ -11,7 +11,7 @@ export VER_INC := 1
 # Git
 VER_REV := $(shell git show -s --pretty=format:%h 2> /dev/null)
 ifneq ($(strip $(VER_REV)),)
-    VER_REV := git$(VER_REV)
+    VER_REV := "git_$(VER_REV)"
 endif
 # SVN
 ifeq ($(strip $(VER_REV)),)
