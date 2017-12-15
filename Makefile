@@ -48,12 +48,13 @@ export PRJDIR     := $(dir $(realpath $(SELF)))
 export LIBDIR     := $(PRJDIR)/lib
 export DOCDIR     := $(PRJDIR)/doc
 export TSTDIR     := $(PRJDIR)/test
+export EXDIR      := $(PRJDIR)/examples
 
 BLDCFG  := config.mk
 DEFCFG  := config.def.mk
 DOCX    := BUGS CREDITS LICENSE README.md TODO
 
-all: lib doc test
+all: lib doc test examples
 
 lib: release
 
@@ -71,6 +72,9 @@ doc:
 test: lib
 	$(MAKE) -C $(TSTDIR) $@
 
+examples: lib
+	$(MAKE) -C $(EXDIR) $@
+
 tarball:
 	$(eval TARNAME := $(PROJECT)-$($(PROJECT)_VERSION)-$($(PROJECT)_REVISION))
 	$(TAR) --transform "s|^|$(TARNAME)/|" -cvzf "$(TARNAME).tar.gz" -T dist.lst
@@ -80,6 +84,7 @@ install: release
 	$(MAKE) -C $(LIBDIR) $@
 	$(MAKE) -C $(DOCDIR) $@
 	$(MAKE) -C $(TSTDIR) $@
+	$(MAKE) -C $(EXDIR) $@
 	@echo Installing extra documents ...
 	@$(MKDIR) $(INST_DOCDIR) && for f in $(DOCX); do $(CPV) $$f $(INST_DOCDIR) ; done ||:
 
@@ -88,6 +93,7 @@ uninstall:
 	$(MAKE) -C $(LIBDIR) $@
 	$(MAKE) -C $(DOCDIR) $@
 	$(MAKE) -C $(TSTDIR) $@
+	$(MAKE) -C $(EXDIR) $@
 	@echo Removing extra documents ...
 	@cd $(INST_DOCDIR) && for f in $(DOCX); do $(RMV) $$f ; done && $(RMDIR) $(INST_DOCDIR) ||:
 
@@ -95,11 +101,13 @@ clean:
 	$(MAKE) -C $(LIBDIR) $@
 	$(MAKE) -C $(DOCDIR) $@
 	$(MAKE) -C $(TSTDIR) $@
+	$(MAKE) -C $(EXDIR) $@
 
 distclean: clean
 	$(MAKE) -C $(LIBDIR) $@
 	$(MAKE) -C $(DOCDIR) $@
 	$(MAKE) -C $(TSTDIR) $@
+	$(MAKE) -C $(EXDIR) $@
 	$(RM) $(BLDCFG) *.tar.gz
 
 $(BLDCFG) config:
@@ -114,6 +122,6 @@ include $(BLDCFG)
 # Handy hack: Get the value of any makefile variable by executing 'make print-VARIABLE_NAME'
 print-% : ; $(info $* is a $(flavor $*) variable set to "$($*)") @true
 
-.PHONY: all lib doc test release debug tarball config version clean distclean install uninstall
+.PHONY: all lib doc test examples release debug tarball config version clean distclean install uninstall
 
 ## EOF
