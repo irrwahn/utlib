@@ -45,7 +45,7 @@ DEP   := $(BIN:%=%.d)
 examples: $(BIN)
 
 %: %.c $(SELF)
-	$(CC) -c $(CFLAGS) -I$(LIBDIR) -L$(LIBDIR) -o $* $*.c -lut
+	$(CC) $(CFLAGS) -I$(LIBDIR) -L$(LIBDIR) -o $* $*.c -lut
 
 install:
 	@echo "TODO: install"
