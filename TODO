@@ -3,20 +3,19 @@ Outstanding TODOs in no particular order
 * Add utlib general description man page
 * Add URL encode/decode
 * Add string (un)escape
-* Add wcs_trim; wcs_skip; etc. to library?
 * Add str_xcpy; str_xcat; etc. to library
-* Add example programs (install?)
-* Add examples in man pages
 
 
 WiP:
 ----
-* Add utf8 utility functions
-* Add tests (build, install?)
+* Add remaining utf8 utility functions: utf8_str_encode(), utf8_mem_encode()
+* Add remaining test modules
+* Add more example programs: logging, uf8_decoder, ...  (install?)
 
 
 Deferred:
 ---------
+* Add more examples to man pages (refer to example programs?)
 
 
 Implemented:
@@ -29,3 +28,4 @@ Implemented:
 
 Rejected:
 ---------
+* Add wcs_trim; wcs_skip; etc. to library?
