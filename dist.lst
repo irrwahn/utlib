@@ -8,6 +8,7 @@ config.def.mk
 dist.lst
 version.mk
 doc/Makefile
+doc/utlib.3.t
 examples/Makefile
 examples/ntime_ex01.c
 examples/prng_ex01.c

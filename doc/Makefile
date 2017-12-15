@@ -38,28 +38,39 @@ ifneq ($(MAKE_DEPTH),1)
 endif
 
 SELF  := $(lastword $(MAKEFILE_LIST))
-TXTF  := $(wildcard *.?.txt)
-MANF  := $(TXTF:%.txt=%)
 
-release debug:
+ORGF  := $(wildcard *.t)
+CSRC  = $(wildcard $(LIBDIR)/*.c)
+CSRC  += $(subst $(LIBDIR)/str_all.h,,$(subst $(LIBDIR)/version.h,,$(wildcard $(LIBDIR)/*.h)))
+RAWF  = $(wildcard *.tx_)
+MANF  = $(RAWF:%.tx_=%) $(ORGF:%.t=%)
+TXTF  = $(wildcard *.txt)
 
-doc: doc_pre $(MANF) $(SELF)
+doc: gen.mk $(MANF) $(SELF)
 
-doc_pre:
+gen.mk: $(CSRC)
 	@echo "Generating docs ..."
+	@echo "Extracting manpages from source comments:"
+	@echo "gen: \\" > gen.mk
+	@$(AWK) '/ \*{4} /{close(f); f="$(DOCDIR)/"$$2"."$$3".tx_"; print " ", FILENAME, "-->", f ; print f, "\\" >> "gen.mk" } / \*{2}( |$$)/{print $$0 > f}' $(CSRC)
+	@echo "\n\t@#" >> gen.mk
 
-%: %.txt $(SELF)
-# remove comment format remnants from .txt files
-	@t=$*.txt ; echo -n "  fix up $$t" ; $(SED) -i -E 's/^ \*\*( |$$)//' $$t
-# if possible, run .txt files through txt2man to produce manpages,
-# then regenerate pretty-printed .txt files from those man pages
-	@t=$*.txt ; command -pv $(TXT2MAN) >/dev/null && \
+.PRECIOUS: %.tx_
+%.tx_: %.t $(SELF)
+	@$(CP) $*.t $@
+
+%: %.tx_ $(SELF)
+# remove comment format remnants from .tx_ files,
+	@t=$*.tx_ ; echo -n "  fix up $$t" ; $(SED) -i -E 's/^ \*\*( |$$)//' $$t
+# if possible, run .tx_ files through txt2man to produce manpages,
+# then generate pretty-printed .txt files from those man pages
+	@t=$*.tx_ ; command -pv $(TXT2MAN) >/dev/null && \
 	  TIT=$$(echo $$t | $(CUT) -d. -f1) && SECT=$$(echo $$t | $(CUT) -d. -f2) && \
 	  MAN=$$TIT.$$SECT && TIT=$$(echo $$TIT | $(SED) 's/.*/\U&/') && \
 	  echo -n ", convert to $$MAN" && \
 	  $(TXT2MAN) -t$$TIT -r$(PROJECT) -s$$SECT -v'$(DOCNAME)' $$t > $$MAN && \
-	  command -pv $(MAN) >/dev/null && echo ", regenerate $$t" && \
-	  MANWIDTH=78 $(MAN) -l $$MAN > "$$t.m" && $(MV) "$$t.m" "$$t" || echo ''
+	  command -pv $(MAN) >/dev/null && echo ", generate $$MAN.txt" && \
+	  MANWIDTH=78 $(MAN) -l $$MAN > "$$MAN.txt" || echo ''
 
 install:
 	@echo Installing compressed man pages ...
@@ -74,10 +85,14 @@ uninstall:
 	@cd $(INST_DOCDIR) && for f in $(TXTF); do $(RMV) $$f ; done ||:
 
 clean:
-	$(RM) $(TXTF) $(MANF)
+	$(RM) gen.mk *.tx_ $(TXTF) $(MANF)
 
 distclean: clean
 
-.PHONY: release debug doc doc_pre install uninstall clean distclean
+ifeq ($(MAKECMDGOALS),doc)
+include gen.mk
+endif
+
+.PHONY: doc gen install uninstall clean distclean
 
 ## EOF

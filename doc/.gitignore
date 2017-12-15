@@ -1,4 +1,5 @@
 # ignore generated text files and man pages
+/*.tx_
 /*.txt
 /*.[12345678]
 

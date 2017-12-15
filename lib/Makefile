@@ -83,10 +83,6 @@ $(STR_H): $(SELF)
 	@echo "#endif" >> $(STR_H)
 	@echo Generated $(STR_H)
 
-doc: | $(SRC) $(HDR)
-	@echo Extracting manpages from source comments:
-	@$(AWK) '/ \*{4} /{close(f); f="$(DOCDIR)/"$$2"."$$3".txt"; print " ", FILENAME, "-->", f} / \*{2}( |$$)/{print $$0 > f}' $(SRC) $(HDR)
-
 install:
 	@$(MKDIR) $(INST_LIBDIR) \
 		&& $(CPV) $(ARNAME) $(INST_LIBDIR) \

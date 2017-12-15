@@ -66,10 +66,8 @@ debug:   CFLAGS += $(CDFLAGS) $(DBG_OPT)
 release debug:
 	@echo $@ build, version [$($(PROJECT)_VERSION)], revision [$($(PROJECT)_REVISION)]
 	$(MAKE) -C $(LIBDIR) $@
-	$(MAKE) -C $(DOCDIR) $@
 
 doc:
-	$(MAKE) -C $(LIBDIR) $@
 	$(MAKE) -C $(DOCDIR) $@
 
 test: lib
