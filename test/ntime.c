@@ -11,7 +11,7 @@
 
 #include "testsupp.h"
 
-int REGISTER(ntime)( int id )
+REGISTER( ntime )
 {
     int err = 0;
     const ntime_t ec = -1;
@@ -19,10 +19,10 @@ int REGISTER(ntime)( int id )
     time_t t;
     struct timespec req, rem;
 
-    if ( ntime_res() == ec )    { ++err; FAIL( id, "ntime_res()" ); }
-    if ( ntime_get() == ec )    { ++err; FAIL( id, "ntime_get()" ); }
-    if ( nclock_res() == ec )   { ++err; FAIL( id, "nclock_res()" ); }
-    if ( nclock_get() == ec )   { ++err; FAIL( id, "nclock_get()" ); }
+    if ( ntime_res() == ec )    { ++err; FAIL( "ntime_res()" ); }
+    if ( ntime_get() == ec )    { ++err; FAIL( "ntime_get()" ); }
+    if ( nclock_res() == ec )   { ++err; FAIL( "nclock_res()" ); }
+    if ( nclock_get() == ec )   { ++err; FAIL( "nclock_get()" ); }
 
     t = time( NULL );
     a = ntime_get();
@@ -42,13 +42,13 @@ int REGISTER(ntime)( int id )
     l /= NT_NS_PER_MS;
 
     /* This should pass on any system: */
-    if ( ta - t > 1 || ta - t < 0 ) { ++err; FAIL( id, "ntime_get() deviates from time()" ); }
+    if ( ta - t > 1 || ta - t < 0 ) { ++err; FAIL( "ntime_get() deviates from time()" ); }
     /* These should pass on systems with ticksize <= 10ms: */
-    if ( b - a < 10 || b - a > 20 ) { ++err; FAIL( id, "ntime_get() wobble" ); }
-    if ( l - k < 10 || l - k > 20 ) { ++err; FAIL( id, "nclock_get() wobble" ); }
+    if ( b - a < 10 || b - a > 20 ) { ++err; FAIL( "ntime_get() wobble" ); }
+    if ( l - k < 10 || l - k > 20 ) { ++err; FAIL( "nclock_get() wobble" ); }
 
     if ( !err )
-        PASS( id, "ntime" );
+        PASS( "ntime" );
     return err;
 }
 

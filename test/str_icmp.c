@@ -5,7 +5,7 @@
 #include "testsupp.h"
 
 
-int REGISTER( str_icmp_test )( int id )
+REGISTER( str_icmp_test )
 {
     int i, err = 0;
     static const struct {
@@ -28,11 +28,11 @@ int REGISTER( str_icmp_test )( int id )
         if ( str_icmp( str_itest[i].s, str_itest[i].t ) != str_itest[i].exp )
         {
             ++err;
-            FAIL( id, "str_icmp failed on index %d", i );
+            FAIL( "str_icmp failed on index %d", i );
         }
     }
     if ( !err )
-        PASS( id, "str_icmp_test %d/%d", i, i );
+        PASS( "str_icmp_test %d/%d", i, i );
     return 0;
 }
 

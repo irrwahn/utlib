@@ -5,7 +5,7 @@
 #include "testsupp.h"
 
 
-int REGISTER( str_move_test )( int id )
+REGISTER( str_move_test )
 {
     int i, err = 0;
     char s[100];
@@ -20,7 +20,7 @@ int REGISTER( str_move_test )( int id )
     if ( strcmp( str_move( s, s + 6 ), r[i] ) )
     {
         ++err;
-        FAIL( id, "str_move failed on index %d", i );
+        FAIL( "str_move failed on index %d", i );
     }
     ++i;
 
@@ -28,17 +28,17 @@ int REGISTER( str_move_test )( int id )
     if ( strcmp( str_move( s + 6, s ), o ) || strcmp( s, r[i] ) )
     {
         ++err;
-        FAIL( id, "str_move failed on index %d", i );
+        FAIL( "str_move failed on index %d", i );
     }
     ++i;
 
     if ( !err )
-        PASS( id, "str_move_test %d/%d", i, i );
+        PASS( "str_move_test %d/%d", i, i );
     return err;
 }
 
 
-int REGISTER( str_trim_test )( int id )
+REGISTER( str_trim_test )
 {
     int i, err = 0;
     char buf[400];
@@ -67,28 +67,28 @@ int REGISTER( str_trim_test )( int id )
         if ( strcmp( str_trim(buf), str_ttest[i].tr ) )
         {
             ++err;
-            FAIL( id, "str_trim failed on index %d", i );
+            FAIL( "str_trim failed on index %d", i );
         }
         strcpy( buf, str_ttest[i].o );
         if ( strcmp( str_ltrim(buf), str_ttest[i].ltr ) )
         {
             ++err;
-            FAIL( id, "str_ltrim failed on index %d", i );
+            FAIL( "str_ltrim failed on index %d", i );
         }
         strcpy( buf, str_ttest[i].o );
         if ( strcmp( str_rtrim(buf), str_ttest[i].rtr ) )
         {
             ++err;
-            FAIL( id, "strrtrim failed on index %d", i );
+            FAIL( "strrtrim failed on index %d", i );
         }
     }
     if ( !err )
-        PASS( id, "str_trim_test %d/%d", i, i );
+        PASS( "str_trim_test %d/%d", i, i );
     return 0;
 }
 
 
-int REGISTER( str_skip_test )( int id )
+REGISTER( str_skip_test )
 {
     int i, err = 0;
     static const struct {
@@ -118,16 +118,16 @@ int REGISTER( str_skip_test )( int id )
         if ( strcmp( str_skip( str_stest[i].o, str_stest[i].set ), str_stest[i].sk ) )
         {
             ++err;
-            FAIL( id, "str_skip failed on index %d", i );
+            FAIL( "str_skip failed on index %d", i );
         }
         if ( strcmp( str_skipspace( str_stest[i].o ), str_stest[i].sksp ) )
         {
             ++err;
-            FAIL( id, "str_skipspace failed on index %d", i );
+            FAIL( "str_skipspace failed on index %d", i );
         }
     }
     if ( !err )
-        PASS( id, "str_skip_test %d/%d", i, i );
+        PASS( "str_skip_test %d/%d", i, i );
     return 0;
 }
 

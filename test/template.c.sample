@@ -1,11 +1,11 @@
 #include "testsupp.h"
 
-int REGISTER(example_test)( int id )
+REGISTER( example_test )
 {
     if ( 1 )
-        PASS( id, "<example pass>" );
+        PASS( "<example pass>" );
     else
-        FAIL( id, "<example fail>" );
+        FAIL( "<example fail>" );
     return 0;
 }
 

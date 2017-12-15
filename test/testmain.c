@@ -15,7 +15,7 @@ int main( int argc, char *argv[] )
     if ( errcnt )
         fprintf( stderr, "%d of %d tests failed!\n", errcnt, t );
     else
-        fprintf( stderr, "All %d linked test modules succeeded.\n", t );
+        fprintf( stderr, "All %d linked test modules ran successful.\n", t );
     return errcnt;
 }
 

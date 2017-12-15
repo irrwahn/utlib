@@ -24,7 +24,7 @@ static const struct {
     { NULL, 0, 0 }
 };
 
-int REGISTER( utf8_dectest )( int id )
+REGISTER( utf8_dectest )
 {
     size_t e, n;
     size_t g, eg, b, eb;
@@ -37,7 +37,7 @@ int REGISTER( utf8_dectest )( int id )
         if ( n != dectst[i].good || e != dectst[i].bad )
         {
             ++r;
-            FAIL( id, "utf8_str_count: i=%d %zu/%zu good, %zu/%zu expected bad",
+            FAIL( "utf8_str_count: i=%d %zu/%zu good, %zu/%zu expected bad",
                         i, n, dectst[i].good, e, dectst[i].bad );
         }
         g += n;
@@ -49,7 +49,7 @@ int REGISTER( utf8_dectest )( int id )
         if ( n != dectst[i].good || e != dectst[i].bad )
         {
             ++r;
-            FAIL( id, "utf8_mem_count: i=%d %zu/%zu good, %zu/%zu expected bad",
+            FAIL( "utf8_mem_count: i=%d %zu/%zu good, %zu/%zu expected bad",
                         i, n, dectst[i].good, e, dectst[i].bad );
         }
         g += n;
@@ -58,7 +58,7 @@ int REGISTER( utf8_dectest )( int id )
         eb += dectst[i].bad;
     }
     if ( !r )
-        PASS( id, "utf8_str_count, utf8_mem_count: %zu/%zu good, %zu/%zu expected bad",
+        PASS( "utf8_str_count, utf8_mem_count: %zu/%zu good, %zu/%zu expected bad",
                     g, eg, b, eb );
     return r;
 }
@@ -113,7 +113,7 @@ static int put( uint8_t *s, int n, void *usr )
     return 0;
 }
 
-int REGISTER( utf8_enctest )( int id )
+REGISTER( utf8_enctest )
 {
     size_t e, n;
     struct encstruct usr = { 0, 0, 0 };
@@ -122,11 +122,11 @@ int REGISTER( utf8_enctest )( int id )
     n = utf8_stream_encode( get, put, &usr, &e );
     if ( n != usr.expgood || e != usr.expbad )
     {
-        FAIL( id, "utf8_stream_encode: %zu/%zu good, %zu/%zu expected bad",
+        FAIL( "utf8_stream_encode: %zu/%zu good, %zu/%zu expected bad",
                     n, usr.expgood, e, usr.expbad );
         return 1;
     }
-    PASS( id, "utf8_stream_encode: %zu/%zu good, %zu/%zu expected bad",
+    PASS( "utf8_stream_encode: %zu/%zu good, %zu/%zu expected bad",
                 n, usr.expgood, e, usr.expbad );
     return 0;
 }
