@@ -8,6 +8,9 @@ config.def.mk
 dist.lst
 version.mk
 doc/Makefile
+examples/Makefile
+examples/ntime_ex01.c
+examples/prng_ex01.c
 lib/inc_priv/utf8_indec.h
 lib/inc_priv/utf8_inenc.h
 lib/Makefile
@@ -29,10 +32,12 @@ lib/utf8_encode.c
 lib/utf8_encode.h
 lib/utf8_locale.c
 lib/utf8_locale.h
-test/bendian.c
-test/example.c
 test/Makefile
+test/bendian.c
 test/ntime.c
+test/str_icmp.c
+test/str_trim.c
+test/template.c.sample
 test/testmain.c
 test/testmain.h
 test/testsupp.h
