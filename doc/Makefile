@@ -38,43 +38,47 @@ ifneq ($(MAKE_DEPTH),1)
 endif
 
 SELF  := $(lastword $(MAKEFILE_LIST))
+GENMK := gen.mk
 
 ORGF  := $(wildcard *.t)
 CSRC  = $(wildcard $(LIBDIR)/*.c)
 CSRC  += $(subst $(LIBDIR)/str_all.h,,$(subst $(LIBDIR)/version.h,,$(wildcard $(LIBDIR)/*.h)))
 RAWF  = $(wildcard *.tx_)
-MANF  = $(RAWF:%.tx_=%) $(ORGF:%.t=%)
-TXTF  = $(wildcard *.txt)
+TXTF  = $(RAWF:%.tx_=%.txt) $(ORGF:%.t=%.txt)
+MANF  = $(TXTF:%.txt=%)
 
-doc: gen.mk $(MANF) $(SELF)
+doc: $(GENMK) $(TXTF) $(SELF)
 
-gen.mk: $(CSRC)
-	@echo "Generating docs ..."
+$(GENMK): $(CSRC) $(SELF)
 	@echo "Extracting manpages from source comments:"
-	@echo "gen: \\" > gen.mk
-	@$(AWK) '/ \*{4} /{close(f); f="$(DOCDIR)/"$$2"."$$3".tx_"; print " ", FILENAME, "-->", f ; print f, "\\" >> "gen.mk" } / \*{2}( |$$)/{print $$0 > f}' $(CSRC)
-	@echo "\n\t@#" >> gen.mk
+	@echo "gen: \\" > $(GENMK)
+	@$(AWK) '/ \*{4} /{close(f); f=$$2"."$$3".tx_"; print " ",FILENAME,"-->",f; print f,"\\" >>"$(GENMK)"} \
+			 / \*{2}( |$$)/{print $$0 >f}' $(CSRC)
+	@echo "\n\t@:" >> $(GENMK)
+	@echo "Processing man pages:"
 
 .PRECIOUS: %.tx_
 %.tx_: %.t $(SELF)
-	@$(CP) $*.t $@
+	@$(CP) $*.t $*.tx_
 
-%: %.tx_ $(SELF)
-# remove comment format remnants from .tx_ files,
+%.txt: %.tx_ $(SELF)
+# Remove comment remnants from .tx_ files.
 	@t=$*.tx_ ; echo -n "  fix up $$t" ; $(SED) -i -E 's/^ \*\*( |$$)//' $$t
-# if possible, run .tx_ files through txt2man to produce manpages,
-# then generate pretty-printed .txt files from those man pages
+# If possible, run .tx_ files through txt2man to produce manpages and
+# generate pretty-printed .txt files from those man pages, or just copy
+# the .tx_ to .txt as a last ditch effort.
 	@t=$*.tx_ ; command -pv $(TXT2MAN) >/dev/null && \
 	  TIT=$$(echo $$t | $(CUT) -d. -f1) && SECT=$$(echo $$t | $(CUT) -d. -f2) && \
 	  MAN=$$TIT.$$SECT && TIT=$$(echo $$TIT | $(SED) 's/.*/\U&/') && \
 	  echo -n ", convert to $$MAN" && \
 	  $(TXT2MAN) -t$$TIT -r$(PROJECT) -s$$SECT -v'$(DOCNAME)' $$t > $$MAN && \
 	  command -pv $(MAN) >/dev/null && echo ", generate $$MAN.txt" && \
-	  MANWIDTH=78 $(MAN) -l $$MAN > "$$MAN.txt" || echo ''
+	  MANWIDTH=78 $(MAN) -l $$MAN > "$$MAN.txt" \
+	  || ( echo ", copy to $$MAN.txt" && $(CP) $*.tx_ $*.txt )
 
 install:
 	@echo Installing compressed man pages ...
-	@$(MKDIR) $(INST_MANDIR) && for f in $(MANF); do $(GZIP_CV) $$f > $(INST_MANDIR)/$$f.gz ; done ||:
+	@$(MKDIR) $(INST_MANDIR) && for f in $(MANF); do if [ -f $$f ] ; then $(GZIP_CV) $$f > $(INST_MANDIR)/$$f.gz ; fi ; done ||:
 	@echo Installing documentation ...
 	@$(MKDIR) $(INST_DOCDIR) && for f in $(TXTF); do $(CPV) $$f $(INST_DOCDIR) ; done ||:
 
@@ -85,12 +89,12 @@ uninstall:
 	@cd $(INST_DOCDIR) && for f in $(TXTF); do $(RMV) $$f ; done ||:
 
 clean:
-	$(RM) gen.mk *.tx_ $(TXTF) $(MANF)
+	$(RM) $(GENMK) *.tx_ $(TXTF) $(MANF)
 
 distclean: clean
 
 ifeq ($(MAKECMDGOALS),doc)
-include gen.mk
+-include $(GENMK)
 endif
 
 .PHONY: doc gen install uninstall clean distclean

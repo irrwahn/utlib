@@ -81,7 +81,7 @@ tarball:
 	$(eval TARNAME := $(PROJECT)-$($(PROJECT)_VERSION)-$($(PROJECT)_REVISION))
 	$(TAR) --transform "s|^|$(TARNAME)/|" -cvzf "$(TARNAME).tar.gz" -T dist.lst
 
-install: release
+install: lib doc
 	@echo Installing to $(INST_PREFIX) ...
 	$(MAKE) -C $(LIBDIR) $@
 	$(MAKE) -C $(DOCDIR) $@
