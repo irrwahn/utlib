@@ -1,2 +1,7 @@
-# ignore generated files
-*.[do]
+# Ignore EVERYTHING ...
+*
+
+# ... except:
+!.gitignore
+!/Makefile
+!/*.c

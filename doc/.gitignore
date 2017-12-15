@@ -2,6 +2,7 @@
 /*.tx_
 /*.txt
 /*.[12345678]
+/gen.mk
 
 # except foo.txt which is maintained by hand
 # !/foo.txt
