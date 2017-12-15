@@ -11,6 +11,7 @@ doc/Makefile
 examples/Makefile
 examples/ntime_ex01.c
 examples/prng_ex01.c
+examples/utf8_encode_ex01.c
 lib/inc_priv/utf8_indec.h
 lib/inc_priv/utf8_inenc.h
 lib/Makefile
