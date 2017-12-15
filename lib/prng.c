@@ -38,10 +38,6 @@
 
 #include <prng.h>
 
-struct prng_random_ctx_t_struct {
-    uint64_t a, b, c, d;
-};
-
 static prng_random_ctx_t ctx_unsafe = PRNG_RANDOM_CTX_INITIALIZER;
 
 /*

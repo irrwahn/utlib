@@ -83,6 +83,10 @@ extern "C" {
 #define PRNG_RANDOM_FLEASEED         0xf1ea5eedULL
 #define PRNG_RANDOM_CTX_INITIALIZER  { PRNG_RANDOM_FLEASEED, 0, 0, 0 }
 
+struct prng_random_ctx_t_struct {
+    uint64_t a, b, c, d;
+};
+
 typedef
     struct prng_random_ctx_t_struct
     prng_random_ctx_t;
