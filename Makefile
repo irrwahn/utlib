@@ -119,7 +119,9 @@ $(BLDCFG) config:
 		|| ( rm -f $(BLDCFG) ; echo "    WORKAROUND: manually copy '$(DEFCFG)' to '$(BLDCFG)'." ; false )
 	@echo "Generated $(BLDCFG)"
 
-include $(BLDCFG)
+ifneq ($(MAKECMDGOALS),config)
+	include $(BLDCFG)
+endif
 
 # Handy hack: Get the value of any makefile variable by executing 'make print-VARIABLE_NAME'
 print-% : ; $(info $* is a $(flavor $*) variable set to "$($*)") @true
