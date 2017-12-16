@@ -51,10 +51,10 @@ doc: $(GENMK) $(TXTF) $(SELF)
 
 $(GENMK): $(CSRC) $(SELF)
 	@echo "Extracting manpages from source comments:"
-	@echo "gen: \\" > $(GENMK)
+	@echo -n "gen: " > $(GENMK)
 	@$(AWK) '/ \*{4} /{close(f); f=$$2"."$$3".tx_"; print " ",FILENAME,"-->",f; print f,"\\" >>"$(GENMK)"} \
 			 / \*{2}( |$$)/{print $$0 >f}' $(CSRC)
-	@echo "\n\t@:" >> $(GENMK)
+	@echo >> $(GENMK)
 	@echo "Processing man pages:"
 
 .PRECIOUS: %.tx_
