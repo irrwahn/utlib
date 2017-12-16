@@ -63,16 +63,16 @@ $(SONAME_XXX): $(OBJ) $(SELF)
 	$(CC) -c $(CFLAGS) $(CSFLAGS) -o $*.o $*.c
 
 version:
-	@echo "/* Generated file, do not edit! */\n" > $(VER_H) \
+	@echo "/* Generated file, do not edit! */" > $(VER_H) \
 		&& echo "#ifndef VERSION_H_INCLUDED" >> $(VER_H) \
-		&& echo "#define VERSION_H_INCLUDED\n" >> $(VER_H) \
+		&& echo "#define VERSION_H_INCLUDED" >> $(VER_H) \
 		&& echo "#define UTLIB_VERSION_MAJOR     $($(PROJECT)_VER_MJR)" >> $(VER_H) \
 		&& echo "#define UTLIB_VERSION_MINOR     $($(PROJECT)_VER_MNR)" >> $(VER_H) \
 		&& echo "#define UTLIB_VERSION_INCREMENT $($(PROJECT)_VER_INC)" >> $(VER_H) \
 		&& echo "#define UTLIB_VERSION_STRING    \"$($(PROJECT)_VERSION)\"" >> $(VER_H) \
 		&& echo "#define UTLIB_VERSION_REVISION  \"$($(PROJECT)_REVISION)\"" >> $(VER_H) \
 		&& echo "#define UTLIB_VERSION_LONG      \"$($(PROJECT)_VERSION)-$($(PROJECT)_REVISION)\"" >> $(VER_H) \
-		&& echo "\n#endif\n\n/* EOF */" >> $(VER_H) \
+		&& echo "#endif" >> $(VER_H) \
 		&& echo Generated $(VER_H)
 
 $(STR_H): $(SELF)
