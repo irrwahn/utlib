@@ -49,20 +49,23 @@ export MKDIR   := mkdir -pv
 export TOUCH   := touch
 export LN      := ln -sf
 export FIND    := find
-export AWK     := awk
 export GREP    := grep
-export SED     := sed
 export BASENAME:= basename
 export CUT     := cut
-export MAN     := man
 export TXT2MAN := txt2man
 export GZIP_C  := gzip -c
 export GZIP_CV := gzip -cv
 UNAME_S:=$(strip $(shell uname -s 2> /dev/null))
 ifeq ($(UNAME_S),FreeBSD)
     export TAR := gtar
+    export AWK := gawk
+    export SED := gsed
+    export MAN_L := false
 else
     export TAR := tar
+    export AWK := awk
+    export SED := sed
+    export MAN_L := man -l
 endif
 
 # EOF
