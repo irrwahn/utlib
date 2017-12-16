@@ -67,14 +67,13 @@ $(GENMK): $(CSRC) $(SELF)
 # If possible, run .tx_ files through txt2man to produce manpages and
 # generate pretty-printed .txt files from those man pages, or just copy
 # the .tx_ to .txt as a last ditch effort.
-	@t=$*.tx_ ; command -pv $(TXT2MAN) >/dev/null && \
-	  TIT=$$(echo $$t | $(CUT) -d. -f1) && SECT=$$(echo $$t | $(CUT) -d. -f2) && \
-	  MAN=$$TIT.$$SECT && TIT=$$(echo $$TIT | $(SED) 's/.*/\U&/') && \
-	  echo -n ", convert to $$MAN" && \
-	  $(TXT2MAN) -t$$TIT -r$(PROJECT) -s$$SECT -v'$(DOCNAME)' $$t > $$MAN && \
-	  command -pv $(MAN) >/dev/null && echo ", generate $$MAN.txt" && \
-	  MANWIDTH=78 $(MAN) -l $$MAN > "$$MAN.txt" \
-	  || ( echo ", copy to $$MAN.txt" && $(CP) $*.tx_ $*.txt )
+	@t=$*.tx_ ; \
+	    TIT=$$(echo $$t | $(CUT) -d. -f1) && SECT=$$(echo $$t | $(CUT) -d. -f2) \
+	    && MAN=$$TIT.$$SECT && TIT=$$(echo $$TIT | $(SED) 's/.*/\U&/') \
+	    && $(TXT2MAN) -t$$TIT -r$(PROJECT) -s$$SECT -v'$(DOCNAME)' $$t > $$MAN \
+	    && echo -n ", convert to $$MAN"; \
+	    ( MANWIDTH=78 $(MAN_L) $$MAN > "$$MAN.txt" && echo ", generate $$MAN.txt" ) \
+	    || ( echo ", copy to $$MAN.txt" && $(CP) $*.tx_ $*.txt )
 
 install:
 	@echo Installing compressed man pages ...
