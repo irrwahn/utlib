@@ -120,7 +120,7 @@ $(BLDCFG) config:
 	@echo "Generated $(BLDCFG)"
 
 ifneq ($(MAKECMDGOALS),config)
-	include $(BLDCFG)
+include $(BLDCFG)
 endif
 
 # Handy hack: Get the value of any makefile variable by executing 'make print-VARIABLE_NAME'
