@@ -33,7 +33,7 @@
  */
 
 
-#include <stdlib.h>
+#include <stddef.h>
 
 #include <utf8_decode.h>
 

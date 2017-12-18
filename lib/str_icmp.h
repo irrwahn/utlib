@@ -57,7 +57,7 @@
 extern "C" {
 #endif
 
-#include <stdlib.h>     /* need size_t */
+#include <stddef.h>
 
 extern int str_icmp( const char *s1, const char *s2 );
 extern int str_nicmp( const char *s1, const char *s2, size_t n );

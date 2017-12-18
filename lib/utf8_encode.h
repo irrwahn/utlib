@@ -62,7 +62,7 @@ extern "C" {
 #endif
 
 
-#include <stdlib.h>
+#include <stddef.h>
 #include <stdint.h>
 
 #undef UTF_REPLACE_CHAR

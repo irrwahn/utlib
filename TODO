@@ -1,13 +1,13 @@
 Outstanding TODOs in no particular order
 ----------------------------------------
 * Add utlib general description man page
-* Add URL encode/decode
-* Add string (un)escape
 * Add str_xcpy; str_xcat; etc. to library
 
 
 WiP:
 ----
+* Add URL encode/decode
+* Add string (un)escape
 * Add remaining utf8 utility functions: utf8_str_encode(), utf8_mem_encode()
 * Add remaining test modules
 * Add more example programs: logging, uf8_decoder, ...  (install?)
