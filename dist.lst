@@ -42,6 +42,7 @@ test/Makefile
 test/bendian.c
 test/ntime.c
 test/prng.c
+test/str_escape.c
 test/str_icmp.c
 test/str_trim.c
 test/template.c.sample
