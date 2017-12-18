@@ -24,10 +24,14 @@ lib/ntime.c
 lib/ntime.h
 lib/prng.c
 lib/prng.h
+lib/str_escape.c
+lib/str_escape.h
 lib/str_icmp.c
 lib/str_icmp.h
 lib/str_trim.c
 lib/str_trim.h
+lib/str_unescape.c
+lib/str_unescape.h
 lib/utf8_decode.c
 lib/utf8_decode.h
 lib/utf8_encode.c
