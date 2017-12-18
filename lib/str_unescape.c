@@ -268,7 +268,7 @@ size_t str_unescape( char *buf, size_t sz, const char *s, size_t *errcnt )
         }
         if ( ST_ACC == st || ST_ACC1 == st )
         {
-            if ( n < sz - 1 )
+            if ( n + 1 < sz )
             {
                 buf[n++] = c;
                 e = n;
@@ -283,7 +283,7 @@ size_t str_unescape( char *buf, size_t sz, const char *s, size_t *errcnt )
     /* Handle dangling conversions. */
     if ( ST_HEXN == st || ST_OCT1 == st || ST_OCT2 == st )
     {
-        if ( n < sz - 1 )
+        if ( n + 1 < sz )
         {
             buf[n++] = c;
             e = n;
@@ -316,7 +316,7 @@ size_t str_urldecode( char *buf, size_t sz, const char *s, size_t *errcnt )
         }
         if ( ST_ACC == st || ST_ACC1 == st )
         {
-            if ( n < sz - 1 )
+            if ( n + 1 < sz )
             {
                 buf[n++] = c;
                 e = n;

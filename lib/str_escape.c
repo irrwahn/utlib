@@ -91,7 +91,7 @@ ISO/IEC 9899:201x N1570 p67 defines these escape-sequences:
 
 static const unsigned char esc_d[] = {
 /*        _0 _1 _2 _3 _4 _5 _6 _7  _8 _9 _a _b _c _d _e _f */
-/* 0_ */   7, 3, 3, 3, 3, 3, 3, 7,  7, 7, 7, 7, 3, 7, 3, 3,
+/* 0_ */   7, 3, 3, 3, 3, 3, 3, 7,  7, 7, 7, 7, 7, 7, 3, 3,
 /* 1_ */   3, 3, 3, 3, 3, 3, 3, 3,  3, 3, 3, 3, 3, 3, 3, 3,
 /* 2_ */   1, 1, 7, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 0, 0, 1,
 /* 3_ */   0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 1, 1, 1, 1, 1, 1,
@@ -106,8 +106,14 @@ static const unsigned char esc_d[] = {
 #define ESC_SYM(c) (!(c & 0x80) && (esc_d[(c)] & ESC_SYM_MASK))
 
 static const char *hex = "0123456789ABCDEF";
-static const char *sym = "0.\"...fabtnv\\r..";     /* 00 .. 0f */
-
+static const char *sym =
+        "0......abtnvfr.."     /* 00 .. 0f */
+        "................"     /* 10 .. 1f */
+        "..\"............."    /* 20 .. 2f */
+        "................"     /* 30 .. 3f */
+        "................"     /* 40 .. 4f */
+        "............\\..."    /* 50 .. 5f */
+        ;
 
 /*
  **** str_escape 3
@@ -166,10 +172,10 @@ size_t str_escape( char *buf, size_t sz, const char *s )
     {
         if ( ESC_SYM( *p ) )
         {
-            if ( n < sz - 2 )
+            if ( n + 2 < sz )
             {
                 buf[n++] = '\\';
-                buf[n++] = sym[*p & 0xf];
+                buf[n++] = sym[*p];
                 e = n;
             }
             else
@@ -177,7 +183,7 @@ size_t str_escape( char *buf, size_t sz, const char *s )
         }
         else if ( ESC_HEX( *p ) )
         {
-            if ( n < sz - 4 )
+            if ( n + 4 < sz )
             {
                 buf[n++] = '\\';
                 buf[n++] = 'x';
@@ -190,7 +196,7 @@ size_t str_escape( char *buf, size_t sz, const char *s )
         }
         else
         {
-            if ( n < sz - 1 )
+            if ( n + 1 < sz )
             {
                 buf[n++] = *p;
                 e = n;
@@ -212,7 +218,7 @@ size_t str_urlencode( char *buf, size_t sz, const char *s )
     {
         if ( ESC_URL( *p ) )
         {
-            if ( n < sz - 3 )
+            if ( n + 3 < sz )
             {
                 buf[n++] = '%';
                 buf[n++] = hex[(*p >> 4) & 0xF];
@@ -224,7 +230,7 @@ size_t str_urlencode( char *buf, size_t sz, const char *s )
         }
         else
         {
-            if ( n < sz - 1 )
+            if ( n + 1 < sz )
             {
                 buf[n++] = *p;
                 e = n;
