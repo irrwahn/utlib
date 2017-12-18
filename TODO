@@ -1,16 +1,14 @@
 Outstanding TODOs in no particular order
 ----------------------------------------
-* Add utlib general description man page
-* Add str_xcpy; str_xcat; etc. to library
+* Flesh out utlib general description man page: doc/utlib.3.t
+* Add str_xcpy; str_xcat; etc.
 
 
 WiP:
 ----
-* Add URL encode/decode
-* Add string (un)escape
+* Add remaining test modules: logging, str(un)escape(), str_url(en|de)code()
 * Add remaining utf8 utility functions: utf8_str_encode(), utf8_mem_encode()
-* Add remaining test modules
-* Add more example programs: logging, uf8_decoder, ...  (install?)
+* Add more example programs: logging, uf8_decoder, ...  (install examples?)
 
 
 Deferred:
@@ -20,6 +18,7 @@ Deferred:
 
 Implemented:
 ------------
+* Add URL encode/decode, string (un)escape [UW 12/2017]
 * Makefile rules to (un)install docs [UW 12/2017]
 * Retrofit inline documentation into logprintf.[ch] [UW 12/2017]
 * Add htobeXX, htoleXX, betohXX, letohXX to bendian.[ch] [UW 12/2017]
