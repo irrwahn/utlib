@@ -49,7 +49,7 @@
  ** SYNOPSIS
  **   #include <utf8_decode.h>
  **
- **   size_t utf8_stream_decode(uint32_t (*get)(void*), int (*put)(const char *,int,void*), void *usr, size_t *errcnt);
+ **   size_t utf8_stream_encode(uint32_t(*get)(void*), int(*put)(uint8_t*,int,void*), void *usr, size_t *errcnt)
  **
  ** DESCRIPTION
  **   The utf8_stream_encode() function encodes a stream of UTF-32 encoded
