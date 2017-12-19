@@ -1,12 +1,9 @@
 TODOs for 0.0.2 milestone
 -------------------------
 * Flesh out utlib general description man page: doc/utlib.3.t
+* Add remaining test modules: logging, utf8_str_encode()
+* Add more example programs: logging, uf8_decoder, ...
 
-    WiP:
-    ----
-    * Add remaining test modules: logging
-    * Add remaining utf8 utility functions: utf8_str_encode(), utf8_mem_encode()
-    * Add more example programs: logging, uf8_decoder, ...  (install examples?)
 
 =======================================================================
 
@@ -22,6 +19,7 @@ Deferred:
 
 Implemented:
 ------------
+* Add remaining utf8 utility functions: utf8_(str|mem)_encode()  [UW 12/2017]
 * Add test modules for str(un)escape(), str_url(en|de)code() [UW 12/2017]
 * Add URL encode/decode, string (un)escape [UW 12/2017]
 * Makefile rules to (un)install docs [UW 12/2017]

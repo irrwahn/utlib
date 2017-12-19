@@ -41,6 +41,110 @@
 
 
 /*
+ **** utf8_str_encode 3
+ **
+ ** NAME
+ **   utf8_str_encode, utf8_mem_encode - encode UTF-32 to UTF-8 sequences
+ **
+ ** SYNOPSIS
+ **   #include <utf8_encode.h>
+ **
+ **   size_t utf8_str_encode(uint8_t *buf, size_t max, const uint32_t *s, size_t *errcnt);
+ **   size_t utf8_mem_encode(uint8_t *buf, size_t max, const uint32_t *s, size_t size, size_t *errcnt);
+ **
+ ** DESCRIPTION
+ **   The utf8_str_encode() function reads valid UTF-32 encoded Unicode
+ **   code points from the array s and stores up to max UTF-8 encoded
+ **   code points in buf, until it encounters a terminating null word,
+ **   which is not included in the count. For each rejected sequence the
+ **   replacement character U+FFFD is produced.
+ **   If errcnt is not NULL, utf8_str_encode() stores the number of
+ **   malformed sequences detected in *errcnt.
+ **   The utf8_mem_encode() function is similar to utf8_str_encode(),
+ **   except it inspects exactly size bytes from array s and does not
+ **   treat null words special.
+ **
+ ** RETURN VALUE
+ **   The utf8_str_encode() and utf8_mem_encode() functions return the
+ **   number of valid UTF-8 encodings found.
+ **
+ ** NOTES
+ **   The utf8_str_decode() and utf8_mem_decode() functions are not
+ **   affected by the current locale setting.
+ **
+ **   All decoder output has been successfully stored in buf, if the
+ **   returned number of good sequences is less than or equal to max.
+ **
+ ** SEE ALSO
+ **   utf8_encode_h(3), utf8_stream_encode(3)
+ **
+ */
+
+size_t utf8_str_encode( uint8_t *buf, size_t max, const uint32_t *s, size_t *errcnt )
+{
+    uint8_t b[5];
+    int n;
+    size_t ok, bad, cnt, end;
+    const uint32_t *p = s;
+
+    for ( cnt = end = ok = bad = 0, p = s; *p; ++p )
+    {
+        n = utf8_ec( *p, b );
+        if ( 0 < n )
+            ++ok;
+        else
+        {
+            ++bad;
+            n = utf8_ec( UTF_REPLACE_CHAR, b );
+        }
+        if ( cnt + n < max )
+        {
+            for ( int i = 0; i < n; ++i )
+                buf[cnt++] = b[i];
+            end = cnt;
+        }
+        else
+            cnt += n;
+    }
+    buf[end] = '\0';
+    if ( NULL != errcnt )
+        *errcnt = bad;
+    return ok;
+}
+
+size_t utf8_mem_encode( uint8_t *buf, size_t max, const uint32_t *s, size_t size, size_t *errcnt )
+{
+    uint8_t b[5];
+    int n;
+    size_t ok, bad, cnt, end;
+    const uint32_t *p = s;
+
+    for ( cnt = end = ok = bad = 0, p = s; size--; ++p )
+    {
+        n = utf8_ec( *p, b );
+        if ( 0 < n )
+            ++ok;
+        else
+        {
+            ++bad;
+            n = utf8_ec( UTF_REPLACE_CHAR, b );
+        }
+        if ( cnt + n < max )
+        {
+            for ( int i = 0; i < n; ++i )
+                buf[cnt++] = b[i];
+            end = cnt;
+        }
+        else
+            cnt += n;
+    }
+    if ( NULL != errcnt )
+        *errcnt = bad;
+    return ok;
+}
+
+
+/*
  **** utf8_stream_encode 3
  **
  ** NAME

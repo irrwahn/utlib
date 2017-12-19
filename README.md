@@ -25,6 +25,11 @@ tweaked by editing the `config.mk` file. The tools shortcuts declared
 there should give an idea which utilities are required to build utlib.
 
 #### Linux
+Building utlib under Linux requires the following tools:
+
+    Required: gcc or clang, make, awk, sed
+
+    Optional: tar, txt2man
 
 ```
 $ git clone https://github.com/irrwahn/utlib.git
@@ -32,7 +37,11 @@ $ make install
 ```
 
 #### FreeBSD
+Building utlib under FreeBSD requires the following tools:
 
+    Required: clang, gmake, gawk, gsed
+
+    Optional: gtar, txt2man
 ```
 $ git clone https://github.com/irrwahn/utlib.git
 $ gmake install
@@ -52,7 +61,8 @@ $ gmake install
 
 | Version  | Comment              |
 | -------- | -------------------- |
-| 0.0.1    | Work in progress     |
+| 0.0.1    | For the record       |
+| 0.0.2    | Work in progress     |
 
 
 ## Contributing
