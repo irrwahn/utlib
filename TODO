@@ -1,14 +1,18 @@
-Outstanding TODOs in no particular order
-----------------------------------------
+TODOs for 0.0.2 milestone
+-------------------------
 * Flesh out utlib general description man page: doc/utlib.3.t
+
+    WiP:
+    ----
+    * Add remaining test modules: logging
+    * Add remaining utf8 utility functions: utf8_str_encode(), utf8_mem_encode()
+    * Add more example programs: logging, uf8_decoder, ...  (install examples?)
+
+=======================================================================
+
+More outstanding TODOs in no particular order
+---------------------------------------------
 * Add str_xcpy; str_xcat; etc.
-
-
-WiP:
-----
-* Add remaining test modules: logging
-* Add remaining utf8 utility functions: utf8_str_encode(), utf8_mem_encode()
-* Add more example programs: logging, uf8_decoder, ...  (install examples?)
 
 
 Deferred:
