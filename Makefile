@@ -78,7 +78,7 @@ examples: lib
 	$(MAKE) -C $(EXDIR) $@
 
 tarball:
-	$(eval TARNAME := $(PROJECT)-$($(PROJECT)_VERSION)-$($(PROJECT)_REVISION))
+	$(eval TARNAME := $(PROJECT)-$($(PROJECT)_VERSION)$($(PROJECT)_REVISION))
 	$(TAR) --transform "s|^|$(TARNAME)/|" -cvzf "$(TARNAME).tar.gz" -T dist.lst
 
 install: lib doc
