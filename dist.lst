@@ -13,9 +13,12 @@ examples/Makefile
 examples/ntime_ex01.c
 examples/prng_ex01.c
 examples/utf8_encode_ex01.c
+lib/inc_priv/baseconv.h
 lib/inc_priv/utf8_indec.h
 lib/inc_priv/utf8_inenc.h
 lib/Makefile
+lib/base16.c
+lib/base16.h
 lib/bendian.c
 lib/bendian.h
 lib/logging.c
@@ -39,6 +42,7 @@ lib/utf8_encode.h
 lib/utf8_locale.c
 lib/utf8_locale.h
 test/Makefile
+test/base16.c
 test/bendian.c
 test/ntime.c
 test/prng.c
