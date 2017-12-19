@@ -260,6 +260,28 @@ extern "C" {
 
 #endif
 
+#ifdef __FreeBSD__
+#undef htobe16
+#undef htobe32
+#undef htobe64
+#undef betoh16
+#undef betoh32
+#undef betoh64
+
+#undef htole16
+#undef htole32
+#undef htole64
+#undef letoh16
+#undef letoh32
+#undef letoh64
+
+#undef hton16
+#undef hton32
+#undef hton64
+#undef ntoh16
+#undef ntoh32
+#undef ntoh64
+#endif
 
 extern uint16_t htobe16( uint16_t v );
 extern uint32_t htobe32( uint32_t v );
