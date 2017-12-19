@@ -85,22 +85,7 @@ ISO/IEC 9899:201x N1570 p67 defines these escape-sequences:
 
 #include <str_escape.h>
 
-static inline int htoi1( unsigned char c )
-{
-    switch( c )
-    {
-    case '0': case '1': case '2': case '3': case '4': case '5':
-    case '6': case '7': case '8': case '9': return c - '0';
-    case 'a': case 'A': return 0xa;   case 'b': case 'B': return 0xb;
-    case 'c': case 'C': return 0xc;   case 'd': case 'D': return 0xd;
-    case 'e': case 'E': return 0xe;   case 'f': case 'F': return 0xf;
-    default: break;
-    }
-    return -1;
-}
-
-#define is_odigit(d)  ((d)>='0'&&(d)<='7')
-#define otoi1(c)      (is_odigit(c)?(c)-'0':-1)
+#include <inc_priv/baseconv.h>
 
 #define ST_REJ    -1
 #define ST_ACC     0
@@ -127,7 +112,7 @@ static inline int unesc( unsigned char b, int st, char *cp )
         case ST_ESC:
             if ( 'x' == b )
                 return ST_HEX0;
-            if ( 0 <= ( d = otoi1( b ) ) )
+            if ( 0 <= ( d = OTOD( b ) ) )
                 return *cp = d, ST_OCT1;
             switch ( b )
             {
@@ -149,22 +134,22 @@ static inline int unesc( unsigned char b, int st, char *cp )
             return ST_ACC;
             break;
         case ST_HEX0:
-            if ( 0 <= ( d = htoi1( b ) ) )
+            if ( 0 <= ( d = XTOD( b ) ) )
                 return *cp = d, ST_HEXN;
             return *cp = b, ST_REJ;
             break;
         case ST_HEXN:
-            if ( 0 <= ( d = htoi1( b ) ) )
+            if ( 0 <= ( d = XTOD( b ) ) )
                 return *cp = (*cp << 4) | d, ST_HEXN;
             return ST_ACC1;
             break;
         case ST_OCT1:
-            if ( 0 <= ( d = otoi1( b ) ) )
+            if ( 0 <= ( d = OTOD( b ) ) )
                 return *cp = (*cp << 3) | d, ST_OCT2;
             return ST_ACC1;
             break;
         case ST_OCT2:
-            if ( 0 <= ( d = otoi1( b ) ) )
+            if ( 0 <= ( d = OTOD( b ) ) )
                 return *cp = (*cp << 3) | d, ST_ACC;
             return ST_ACC1;
             break;
@@ -187,12 +172,12 @@ static inline int urldec( unsigned char b, int st, char *cp )
             return *cp = b, ST_ACC;
             break;
         case ST_HEX0:
-            if ( 0 <= ( d = htoi1( b ) ) )
+            if ( 0 <= ( d = XTOD( b ) ) )
                 return *cp = d, ST_HEX1;
             return *cp = b, ST_REJ;
             break;
         case ST_HEX1:
-            if ( 0 <= ( d = htoi1( b ) ) )
+            if ( 0 <= ( d = XTOD( b ) ) )
                 return *cp = (*cp << 4) | d, ST_ACC;
             return *cp = b, ST_REJ;
             break;

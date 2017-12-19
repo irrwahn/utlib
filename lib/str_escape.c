@@ -85,6 +85,8 @@ ISO/IEC 9899:201x N1570 p67 defines these escape-sequences:
 
 #include <str_escape.h>
 
+#include <inc_priv/baseconv.h>
+
 #define ESC_URL_MASK  0x01
 #define ESC_HEX_MASK  0x02
 #define ESC_SYM_MASK  0x04
@@ -105,7 +107,6 @@ static const unsigned char esc_d[] = {
 #define ESC_HEX(c)  ((c & 0x80) || (esc_d[(c)] & ESC_HEX_MASK))
 #define ESC_SYM(c) (!(c & 0x80) && (esc_d[(c)] & ESC_SYM_MASK))
 
-static const char *hex = "0123456789ABCDEF";
 static const char *sym =
         "0......abtnvfr.."     /* 00 .. 0f */
         "................"     /* 10 .. 1f */
@@ -187,8 +188,8 @@ size_t str_escape( char *buf, size_t sz, const char *s )
             {
                 buf[n++] = '\\';
                 buf[n++] = 'x';
-                buf[n++] = hex[(*p >> 4) & 0xF];
-                buf[n++] = hex[*p & 0xF];
+                buf[n++] = DTOX(*p >> 4);
+                buf[n++] = DTOX(*p);
                 e = n;
             }
             else
@@ -221,8 +222,8 @@ size_t str_urlencode( char *buf, size_t sz, const char *s )
             if ( n + 3 < sz )
             {
                 buf[n++] = '%';
-                buf[n++] = hex[(*p >> 4) & 0xF];
-                buf[n++] = hex[*p & 0xF];
+                buf[n++] = DTOX(*p >> 4);
+                buf[n++] = DTOX(*p);
                 e = n;
             }
             else

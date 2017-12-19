@@ -5,7 +5,7 @@
 #include <str_escape.h>
 #include <str_unescape.h>
 
-REGISTER( str_escape_test )
+REGISTER( str_escape_test1 )
 {
     int i, err = 0, bad = 0;
     size_t n, e;
@@ -86,9 +86,17 @@ REGISTER( str_escape_test )
         }
     }
     if ( !err )
-        PASS( "str_urlencode/str_urldecode test %d/%d", i, i );
+        PASS( "str_urlencode/str_urldecode test1 %d/%d", i, i );
     bad += err;
-    err = 0;
+    return bad;
+}
+
+
+REGISTER( str_escape_test2 )
+{
+    int i, err = 0, bad = 0;
+    size_t n, e;
+    char buf[500];
 
     static const struct {
         const char *s;
@@ -100,6 +108,7 @@ REGISTER( str_escape_test )
         { " \\",   1, 1,   2, 0 },
         { "\\x",   0, 1,   2, 0 },
         { "\\xD",  1, 0,   3, 0 },
+        { "\\101", 1, 0,   4, 0 },
         { " %",    2, 0,   1, 1 },
         { "%1",    2, 0,   0, 1 },
         { NULL,    0, 0,   0, 0 }
@@ -128,9 +137,9 @@ REGISTER( str_escape_test )
         }
     }
     if ( !err )
-        PASS( "str_unescape/str_urldecode test %d/%d good, %d/%d expected bad", gd, n_exp, bd, e_exp );
+        PASS( "str_unescape/str_urldecode test2 %d/%d good, %d/%d expected bad", gd, n_exp, bd, e_exp );
     else
-        FAIL( "str_unescape/str_urldecode test %d/%d good, %d/%d expected bad", gd, n_exp, bd, e_exp );
+        FAIL( "str_unescape/str_urldecode test2 %d/%d good, %d/%d expected bad", gd, n_exp, bd, e_exp );
     bad += err;
     return bad;
 }
