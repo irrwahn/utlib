@@ -202,13 +202,15 @@ static inline int urldec( unsigned char b, int st, char *cp )
  **
  ** DESCRIPTION
  **   The str_unescape() function copies characters from the null
- **   terminated source character array s to the destination buf, while
+ **   terminated source character array s to the destination buf,
  **   replacing any C-style escape sequences by their designated
  **   replacement characters.
  **   At most sz bytes are written to buf, which is always null
  **   terminated. The objects pointed to by buf and s, respectively,
  **   are allowed to overlap, to allow for in-place conversion of
  **   mutable strings.
+ **   If errcnt is not NULL, the number of failed conversions is
+ **   stored in *errcnt.
  **
  **   The str_urldecode() function works similar, but decodes URL
  **   encoded ("percent-encoded") sequences, according to RFC3986
