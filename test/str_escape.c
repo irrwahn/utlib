@@ -57,7 +57,6 @@ REGISTER( str_escape_test1 )
         {
             ++err;
             FAIL( "str_escape failed on index %d", i );
-            printf( "*******%s******\n", buf );
         }
         n = str_unescape( buf, sizeof buf, buf, &e );
         if ( n >= sizeof buf || e || strcmp( buf, str_otest[i].org ) )
