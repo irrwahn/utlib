@@ -75,6 +75,7 @@ test: lib
 	$(MAKE) -C $(TSTDIR) $@
 
 examples: lib
+	@echo Building examples ...
 	$(MAKE) -C $(EXDIR) $@
 
 tarball:
