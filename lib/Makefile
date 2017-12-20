@@ -54,7 +54,7 @@ STR_H := str_all.h
 release debug: version $(ARNAME) $(SONAME_XXX)
 
 $(ARNAME): $(OBJ) $(SELF)
-	$(AR) -rs $(ARNAME) $(OBJ)
+	$(AR) $(ARNAME) $(OBJ)
 
 $(SONAME_XXX): $(OBJ) $(SELF)
 	$(CCSO) -Wl,-soname,$(SONAME) -o $(SONAME_XXX) $(OBJ)

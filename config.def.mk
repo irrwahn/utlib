@@ -29,7 +29,7 @@ export CC      ?= cc
 export CCSO    := $(CC) -shared
 export LD      := $(CC)
 export STRIP   := strip
-export AR      := ar
+export AR      := ar -c -rs
 
 # Do not edit these flags unless you really know what you're doing!
 export CFLAGS  := -std=c99 -pedantic -Wall -Wextra -fstrict-aliasing -MMD -MP
