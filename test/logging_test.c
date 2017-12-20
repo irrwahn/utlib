@@ -31,7 +31,7 @@ REGISTER(logging_test)
     {
         fprintf(stderr,"%s", buf);
         if ( !strstr( buf, "Test: Success" )
-            || !strstr( buf, ": (logging.c:logging_test:" ) )
+            || !strstr( buf, ": (" __FILE__ ":logging_test:" ) )
             ++err;
     }
     else
