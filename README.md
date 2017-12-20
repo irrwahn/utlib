@@ -124,7 +124,7 @@ Building utlib under FreeBSD requires the following tools:
 | `all`       | build everything            |
 | `config`    | (re-)create `config.mk`     |
 | `debug`     | build debug library         |
-| `doc`       | build documentation          |
+| `doc`       | build documentation         |
 | `release`   | build release library       |
 | `test`      | build and run tests         |
 | `clean`     | remove build artifacts      |
