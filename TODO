@@ -17,6 +17,18 @@ Deferred:
 * Add more examples to man pages (refer to example programs?)
 
 
+Implemented:
+------------
+* Flesh out utlib general description man page: doc/utlib.3.t [UW 12/2017]
+* Add remaining utf8 utility functions: utf8_(str|mem)_encode()  [UW 12/2017]
+* Add test modules for str(un)escape(), str_url(en|de)code() [UW 12/2017]
+* Add URL encode/decode, string (un)escape [UW 12/2017]
+* Makefile rules to (un)install docs [UW 12/2017]
+* Retrofit inline documentation into logprintf.[ch] [UW 12/2017]
+* Add htobeXX, htoleXX, betohXX, letohXX to bendian.[ch] [UW 12/2017]
+* Extract documentation from source files with awk, sed, txt2man [UW 12/2017]
+
+
 Rejected:
 ---------
 * Add wcs_trim; wcs_skip; etc. to library?

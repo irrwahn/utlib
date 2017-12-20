@@ -16,6 +16,6 @@
   } while (0)
 
 #undef REGISTER
-#define REGISTER(X) int (X)(int id__)
+#define REGISTER(X) int X(int id__)
 
 /* EOF */

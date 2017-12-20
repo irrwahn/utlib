@@ -49,9 +49,9 @@ REGISTER( prng_test )
                 ++err;
     }
     if ( !err )
-        PASS( "prng %d/%d ok", i*j, i*j );
+        PASS( "prng_test %d/%d ok", i*j, i*j );
     else
-        FAIL( "prng %d/%d failed", err, i*j );
+        FAIL( "prng_test %d/%d failed", err, i*j );
     return err;
 }
 
