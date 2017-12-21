@@ -1,7 +1,7 @@
 TODOs for 0.0.2 milestone
 -------------------------
 * Add remaining test modules: utf8_str_encode()
-* Add license to test modules (CC0?)
+* Add license to test modules
 * Add more example programs: logging, uf8_decoder, ...
 
 
