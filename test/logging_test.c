@@ -51,6 +51,7 @@ REGISTER(logging_test)
     FILE *fp;
     char buf[500];
 
+    errno = 0;
     log_printf( LOG_DEBUG, "log_%s %m\n", "default" );
 
     while ( NULL == ( fp = tmpfile() ) )
@@ -63,7 +64,7 @@ REGISTER(logging_test)
     if ( NULL != fgets( buf, sizeof buf, fp ) )
     {
         fprintf(stderr,"%s", buf);
-        if ( !strstr( buf, "Test: Success" )
+        if ( !strstr( buf, "Test:" )
             || !strstr( buf, ": (" __FILE__ ":logging_test:" ) )
             ++err;
     }
@@ -73,8 +74,9 @@ REGISTER(logging_test)
 #line 775 "fake.file"
     log_close();
     log_open( LOG_DEBUG, LOG_TO_FILE, stderr, "log_to_stderr", 0, 0 );
+    errno = 0;
     log_xprintf( LOG_DEBUG, "%m\n" );
-#line 44 "logging_test.c"
+#line 80 "logging_test.c"
 
     if ( !err )
         PASS( "logging ok" );
