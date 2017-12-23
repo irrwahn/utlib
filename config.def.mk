@@ -25,7 +25,7 @@ export INST_DOCDIR := $(INST_PREFIX)/share/doc/utlib
 export INST_EXDIR  := $(DOCDIR)/examples
 
 # Adjust to match the (native or cross) build system tools:
-export CC      ?= cc
+export CC      := cc
 export CCSO    := $(CC) -shared
 export LD      := $(CC)
 export STRIP   := strip

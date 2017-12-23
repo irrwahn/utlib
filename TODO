@@ -2,6 +2,16 @@ TODOs for 0.0.2 milestone
 -------------------------
 
 
+TODOs for 0.0.3 milestone
+-------------------------
+* Make utlib useful on freestanding implementations (no host OS present).
+  + Add switch to config.mk to enable/disable certain features.
+      -or-
+    Divide sources into two dirs, one for self contained modules and one for "fancy" stuff.
+  + Makefile switch: build only shared lib, or static lib, or both.
+  + For prng.[ch]: #ifndef EINVAL \ #define EINVAL ... \ #endif
+
+
 More outstanding TODOs in no particular order
 ---------------------------------------------
 * Add str_xcpy; str_xcat; etc.
