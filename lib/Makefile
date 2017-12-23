@@ -46,12 +46,20 @@ SONAME_XXX := $(SONAME_XX).$(VER_INC)
 SELF  := $(lastword $(MAKEFILE_LIST))
 SRC   := $(wildcard *.c)
 HDR   := $(wildcard *.h)
+ifneq ($(BUILD_XTRA),0)
+    SRC   += $(wildcard extra/*.c)
+    HDR   += $(wildcard extra/*.h)
+endif
 OBJ   := $(SRC:%.c=%.o)
 DEP   := $(OBJ:%.o=%.d)
 VER_H := version.h
 STR_H := str_all.h
 
-release debug: version $(ARNAME) $(SONAME_XXX)
+ifneq ($(BUILD_SO),0)
+    release debug: version $(ARNAME) $(SONAME_XXX)
+else
+    release debug: version $(ARNAME)
+endif
 
 $(ARNAME): $(OBJ) $(SELF)
 	$(AR) $(ARNAME) $(OBJ)
@@ -100,7 +108,7 @@ uninstall:
 	@$(RMDIR) $(INST_LIBDIR) ||:
 
 clean:
-	$(RM) $(VER_H) $(STR_H) *.o *.d *.a *.so*
+	$(RM) $(VER_H) $(STR_H) *.o *.d *.a *.so* extra/*.o extra/*.d
 
 distclean: clean
 

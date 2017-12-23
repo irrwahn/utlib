@@ -43,7 +43,7 @@
 
 #include <ntime.h>
 
-#include "testsupp.h"
+#include "../testsupp.h"
 
 REGISTER( ntime )
 {

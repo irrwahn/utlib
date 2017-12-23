@@ -77,6 +77,12 @@ extern "C" {
 
 #include <limits.h>
 #include <stdint.h>
+#include <errno.h>
+
+#ifndef EINVAL
+#define EINVAL  22
+#endif
+
 
 #define PRNG_RANDOM_MAX  (UINT64_MAX)
 

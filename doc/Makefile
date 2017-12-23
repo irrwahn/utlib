@@ -41,19 +41,23 @@ SELF  := $(lastword $(MAKEFILE_LIST))
 GENMK := gen.mk
 
 ORGF  := $(wildcard *.t)
-CSRC  = $(wildcard $(LIBDIR)/*.c)
-CSRC  += $(subst $(LIBDIR)/str_all.h,,$(subst $(LIBDIR)/version.h,,$(wildcard $(LIBDIR)/*.h)))
+CHSRC  = $(wildcard $(LIBDIR)/*.c)
+CHSRC  += $(subst $(LIBDIR)/str_all.h,,$(subst $(LIBDIR)/version.h,,$(wildcard $(LIBDIR)/*.h)))
+ifneq ($(BUILD_XTRA),0)
+    CHSRC += $(wildcard $(LIBDIR)/extra/*.c)
+    CHSRC += $(wildcard $(LIBDIR)/extra/*.h)
+endif
 RAWF  = $(wildcard *.tx_)
 TXTF  = $(RAWF:%.tx_=%.txt) $(ORGF:%.t=%.txt)
 MANF  = $(TXTF:%.txt=%)
 
 doc: $(GENMK) $(TXTF) $(SELF)
 
-$(GENMK): $(CSRC) $(SELF)
+$(GENMK): $(CHSRC) $(SELF)
 	@echo "Extracting manpages from source comments:"
 	@echo -n "gen: " > $(GENMK)
 	@$(AWK) '/ \*{4} /{close(f); f=$$2"."$$3".tx_"; print " ",FILENAME,"-->",f; print f,"\\" >>"$(GENMK)"} \
-			 / \*{2}( |$$)/{print $$0 >f}' $(CSRC)
+			 / \*{2}( |$$)/{print $$0 >f}' $(CHSRC)
 	@echo >> $(GENMK)
 	@echo "Processing man pages:"
 

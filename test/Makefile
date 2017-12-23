@@ -46,6 +46,10 @@ SONAME_XXX := $(SONAME_XX).$(VER_INC)
 SELF  := $(lastword $(MAKEFILE_LIST))
 SRC   := $(wildcard *.c)
 HDR   := $(wildcard *.h)
+ifneq ($(BUILD_XTRA),0)
+    SRC   += $(wildcard extra/*.c)
+    HDR   += $(wildcard extra/*.h)
+endif
 OBJ   := $(SRC:%.c=%.o)
 DEP   := $(OBJ:%.o=%.d)
 BIN   := runtests
@@ -59,7 +63,7 @@ $(BIN): $(TST_H) $(OBJ) $(SELF)
 	$(LD) -L$(LIBDIR) -o$(BIN) $(OBJ) -lut
 
 %.o: %.c $(SELF)
-	$(CC) -c $(CFLAGS) -I$(LIBDIR) -o $*.o $*.c
+	$(CC) -c $(CFLAGS) -I$(LIBDIR) -I$(LIBDIR)/extra -o $*.o $*.c
 
 $(TST_H): $(SRC) $(SELF)
 	@echo "Collecting test modules ..."
@@ -74,7 +78,7 @@ uninstall:
 	@echo "TODO: uninstall"
 
 clean:
-	$(RM) $(BIN) $(TST_H) *.o *.d
+	$(RM) $(BIN) $(TST_H) *.o *.d extra/*.o extra/*.d
 
 distclean: clean
 

@@ -36,7 +36,7 @@
 
 #include <bendian.h>
 
-#include "testsupp.h"
+#include "../testsupp.h"
 
 #define U16  0xa5c3U
 #define U16n 0xc3a5U

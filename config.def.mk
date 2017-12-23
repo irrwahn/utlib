@@ -16,6 +16,12 @@
 export RLS_OPT := -DWITH_PTHREAD
 export DBG_OPT := -DWITH_PTHREAD
 
+# Set this to 0 to exclude the more demanding parts:
+export BUILD_XTRA := 1
+
+# Set this to 0 to build the static library only:
+export BUILD_SO := 1
+
 # Default install directories:
 export INST_PREFIX ?= /usr/local
 export INST_LIBDIR := $(INST_PREFIX)/lib/utlib
@@ -35,7 +41,13 @@ export AR      := ar -c -rs
 export CFLAGS  := -std=c99 -pedantic -Wall -Wextra -fstrict-aliasing -MMD -MP
 export CRFLAGS := -O2 -DNDEBUG
 export CDFLAGS := -O0 -DDEBUG -g3 -pg -ggdb
-export CSFLAGS := -I. -fPIC
+export CSFLAGS := -I.
+ifneq ($(BUILD_XTRA),0)
+    export CSFLAGS += -I./extra
+endif
+ifneq ($(BUILD_SO),0)
+    export CSFLAGS += -fPIC
+endif
 
 # Generic tool shorts:
 export SH      := sh

@@ -37,7 +37,7 @@
 
 #include <logging.h>
 
-#include "testsupp.h"
+#include "../testsupp.h"
 
 /*
  * If someone can come up with a way to test syslog logging, without

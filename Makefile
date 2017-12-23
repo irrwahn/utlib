@@ -58,7 +58,7 @@ BLDCFG  := config.mk
 DEFCFG  := config.def.mk
 DOCX    := BUGS CREDITS LICENSE README.md TODO
 
-all: lib doc test examples
+all: lib doc test
 
 lib: release
 
