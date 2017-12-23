@@ -6,7 +6,7 @@
 # by most recent tag info, if we have a git repository:
 export VER_MJR := 0
 export VER_MNR := 0
-export VER_INC := 1
+export VER_INC := 2
 
 # Git
 # Try to extract a revision tag from repository:
