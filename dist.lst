@@ -19,12 +19,6 @@ lib/inc_priv/utf8_inenc.h
 lib/Makefile
 lib/base16.c
 lib/base16.h
-lib/bendian.c
-lib/bendian.h
-lib/logging.c
-lib/logging.h
-lib/ntime.c
-lib/ntime.h
 lib/prng.c
 lib/prng.h
 lib/str_escape.c
@@ -41,11 +35,14 @@ lib/utf8_encode.c
 lib/utf8_encode.h
 lib/utf8_locale.c
 lib/utf8_locale.h
+lib/extra/bendian.c
+lib/extra/bendian.h
+lib/extra/logging.c
+lib/extra/logging.h
+lib/extra/ntime.c
+lib/extra/ntime.h
 test/Makefile
 test/base16_test.c
-test/bendian_test.c
-test/logging_test.c
-test/ntime_test.c
 test/prng_test.c
 test/str_escape_test.c
 test/str_icmp_test.c
@@ -55,3 +52,6 @@ test/testmain.c
 test/testmain.h
 test/testsupp.h
 test/utf8_test.c
+test/extra/bendian_test.c
+test/extra/logging_test.c
+test/extra/ntime_test.c
