@@ -91,14 +91,22 @@ $(STR_H): $(SELF)
 	@echo "#endif" >> $(STR_H)
 	@echo Generated $(STR_H)
 
-install:
-	@$(MKDIR) $(INST_LIBDIR) \
-		&& $(CPV) $(ARNAME) $(INST_LIBDIR) \
-		&& $(CPV) $(SONAME_XXX) $(INST_LIBDIR) \
+ifneq ($(BUILD_SO),0)
+    install: inst_hdr inst_ar inst_so
+else
+    install: inst_hdr inst_ar
+endif
+
+inst_hdr:
+	@$(MKDIR) $(INST_INCDIR) && $(CPV) $(HDR) $(INST_INCDIR)
+
+inst_ar:
+	@$(MKDIR) $(INST_LIBDIR) && $(CPV) $(ARNAME) $(INST_LIBDIR)
+
+inst_so:
+	@$(MKDIR) $(INST_LIBDIR) && $(CPV) $(SONAME_XXX) $(INST_LIBDIR) \
 		&& $(LN) $(SONAME_XXX) $(INST_LIBDIR)/$(SONAME_X) \
 		&& $(LN) $(SONAME_XXX) $(INST_LIBDIR)/$(SONAME)
-	@$(MKDIR) $(INST_INCDIR) \
-		&& $(CPV) $(HDR) $(INST_INCDIR)
 
 uninstall:
 	@$(foreach H,$(HDR),$(RMV) $(INST_INCDIR)/$(H) ||:;)
@@ -114,6 +122,6 @@ distclean: clean
 
 -include $(DEP)
 
-.PHONY: release debug version doc install uninstall clean distclean
+.PHONY: release debug version doc install inst_hdr inst_ar inst_so uninstall clean distclean
 
 ## EOF
