@@ -34,7 +34,7 @@ export INST_EXDIR  := $(DOCDIR)/examples
 export CC      := cc
 export CCSO    := $(CC) -shared
 export LD      := $(CC)
-export STRIP   := strip
+export STRIP   := strip --strip-unneeded
 export AR      := ar -c -rs
 
 # Do not edit these flags unless you really know what you're doing!

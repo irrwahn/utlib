@@ -55,17 +55,22 @@ DEP   := $(OBJ:%.o=%.d)
 VER_H := version.h
 STR_H := str_all.h
 
+release debug: version $(ARNAME)
 ifneq ($(BUILD_SO),0)
-    release debug: version $(ARNAME) $(SONAME_XXX)
-else
-    release debug: version $(ARNAME)
+    release debug: $(SONAME_XXX)
 endif
+release: strip
 
 $(ARNAME): $(OBJ) $(SELF)
 	$(AR) $(ARNAME) $(OBJ)
 
 $(SONAME_XXX): $(OBJ) $(SELF)
 	$(CCSO) -Wl,-soname,$(SONAME) -o $(SONAME_XXX) $(OBJ)
+
+strip:
+	@echo stripping $(ARNAME)
+	@$(STRIP) $(ARNAME)
+	@[ -f $(SONAME_XXX) ] && echo "stripping $(SONAME_XXX)" && $(STRIP) $(SONAME_XXX) ||:
 
 %.o: %.c $(STR_H) $(SELF)
 	$(CC) -c $(CFLAGS) $(CSFLAGS) -o $*.o $*.c
@@ -91,10 +96,9 @@ $(STR_H): $(SELF)
 	@echo "#endif" >> $(STR_H)
 	@echo Generated $(STR_H)
 
+install: inst_hdr inst_ar
 ifneq ($(BUILD_SO),0)
-    install: inst_hdr inst_ar inst_so
-else
-    install: inst_hdr inst_ar
+    install: inst_so
 endif
 
 inst_hdr:
@@ -122,6 +126,6 @@ distclean: clean
 
 -include $(DEP)
 
-.PHONY: release debug version doc install inst_hdr inst_ar inst_so uninstall clean distclean
+.PHONY: release debug strip version doc install inst_hdr inst_ar inst_so uninstall clean distclean
 
 ## EOF
