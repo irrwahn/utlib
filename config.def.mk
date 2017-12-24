@@ -26,7 +26,7 @@ export BUILD_SO := 1
 export INST_PREFIX ?= /usr/local
 export INST_LIBDIR := $(INST_PREFIX)/lib/utlib
 export INST_INCDIR := $(INST_PREFIX)/include/utlib
-export INST_MANDIR := $(INST_PREFIX)/share/man/man1
+export INST_MANDIR := $(INST_PREFIX)/share/man/man3
 export INST_DOCDIR := $(INST_PREFIX)/share/doc/utlib
 export INST_EXDIR  := $(DOCDIR)/examples
 

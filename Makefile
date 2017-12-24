@@ -113,6 +113,7 @@ distclean: clean
 	$(MAKE) -C $(EXDIR) $@
 	$(RM) $(BLDCFG) *.tar.gz
 
+.PRECIOUS: $(BLDCFG)
 $(BLDCFG) config:
 	@sed '/^#!!/d' $(DEFCFG) > $(BLDCFG) 2> /dev/null \
 		|| grep -v '^#!!' $(DEFCFG) > $(BLDCFG) 2> /dev/null \
