@@ -79,6 +79,11 @@ are required to build utlib.  A subsequent `make && make install`
 will build and install utlib.  The build system will always build
 both a static library as well as a shared object.
 
+**NOTE:** If the BUILD_XTRA variable is set to 0 in config.mk, the
+following modules will be excluded from the build: `bendian.h`,
+`logging.h`, `ntime.h`, `utf8_locale.h`. This may aid in building
+the remaining modules for freestanding (non-hosted) implementations.
+
 ### Linux
 
 #### Prerequisites
