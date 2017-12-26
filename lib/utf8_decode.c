@@ -241,7 +241,7 @@ size_t utf8_mem_decode( uint32_t *buf, size_t max, void *s, size_t size, size_t 
  ** SYNOPSIS
  **   #include <utf8_decode.h>
  **
- **   size_t utf8_stream_decode(int (*get)(void*), int (*put)(uint32_t,void*), void *usr, size_t *errcnt);
+ **   size_t utf8_stream_decode(int (*get)(void *), int (*put)(uint32_t,void *), void *usr, size_t *errcnt);
  **
  ** DESCRIPTION
  **   The utf8_stream_decode() function decodes a stream of UTF-8 encoded
