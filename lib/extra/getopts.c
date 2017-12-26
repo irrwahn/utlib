@@ -81,13 +81,13 @@ int getopts( int argc, char *argv[], getopts_t *odef, int (*cb)(int,int,const ch
 
     while ( 0 == r && NULL != ( opt = NEXT_ARG() ) )
     {
-        if ( '-' == *opt )
+        if ( '-' == *opt && '\0' != *(opt+1) )
         {
             if ( '-' == *++opt )
             {
                 if ( !*++opt )
                 {   /* "--" ends option processing */
-                    r = cb( idx, OPTERR_SUCCESS, "" );
+                    r = cb( idx-1, OPTERR_SUCCESS, "--" );
                     break;
                 }
                 /* long option */

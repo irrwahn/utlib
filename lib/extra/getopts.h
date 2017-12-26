@@ -74,7 +74,7 @@ extern "C" {
 #define OPTERR_MISSING_ARG -2
 
 typedef
-    struct opt_struct {
+    struct getopts_t_struct {
         unsigned optid;
         unsigned arg;
         char sopt;
