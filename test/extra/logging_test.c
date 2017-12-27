@@ -45,7 +45,7 @@
  * for the message to hit the log: Please let me know!
  */
 
-REGISTER(logging_test)
+REGISTER( logging_test )
 {
     int err = 0;
     FILE *fp;
