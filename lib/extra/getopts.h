@@ -48,7 +48,7 @@
  **   MACROS
  **     OPTARG_NONE, OPTARG_REQUIRED, OPTARG_OPTIONAL  constants to tell getopts() about option arguments
  **
- **     OPTERR_SUCCESS, OPTERR_UNKNOWN_OPT, OPTERR_MISSING_ARG  error codes returned by getopts()
+ **     OPTERR_END_OF_OPT, OPTERR_UNKNOWN_OPT, OPTERR_MISSING_ARG  error codes returned by getopts()
  **
  **   FUNCTIONS
  **     getopts()  function to parse argument vectors and extract option and non-option arguments
@@ -69,7 +69,7 @@ extern "C" {
 #define OPTARG_REQUIRED     1
 #define OPTARG_OPTIONAL     2
 
-#define OPTERR_SUCCESS      0
+#define OPTERR_END_OF_OPT   0
 #define OPTERR_UNKNOWN_OPT -1
 #define OPTERR_MISSING_ARG -2
 

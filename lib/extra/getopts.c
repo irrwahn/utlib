@@ -55,64 +55,91 @@
  ** DESCRIPTION
  **   The getopts() function parses an argument vector, most commonly
  **   the arguments passed on the command-line on program invocation.
+ **   It is roughly comparable to, and is provided as an alternative to,
+ **   the getopt(3) function, but takes a slightly different approach
+ **   with respect to the method of invocation.
+ **
  **   Its arguments argc and argv are the argument count and array as
  **   passed to the main() function on program invocation. An element
  **   of argv that starts with '-' (which is not immediately followed by
  **   another '-') is interpreted as a short option element.
  **   The characters of this element following the initial '-' are taken
  **   as option characters. A single '-' not followed by any other
- **   characters is interpreted as a non-option argument. Any character
- **   sequence starting with "--" is interpreted as a long option. An
- **   element consisting only of the sequence "--" not immediately
- **   followed by any other characters immediately stops any further
- **   option processing by the getopts() function.
+ **   characters is interpreted as the literal non-option argument "-".
+ **   Any character sequence starting with "--" is interpreted as a long
+ **   option. An element consisting only of the sequence "--" not
+ **   immediately followed by any other characters immediately stops any
+ **   further option processing by the getopts() function.
  **
  **   The odef argument to the getopts() function is a pointer to the
- **   first element of an array of element of the structure type
+ **   first element of an array of elements of the structure type
  **   getopts_t, defined in <getopts.h> as
  **
- **     typedef
- **         struct getopts_t_struct {
- **             unsigned optid;
- **             unsigned arg;
- **             char sopt;
- **             const char *lopt;
- **             const char *usemsg;
- **         }
- **         getopts_t;
+ ** 	typedef
+ ** 		struct getopts_t_struct {
+ ** 			unsigned optid;
+ ** 			unsigned arg;
+ ** 			char sopt;
+ ** 			const char *lopt;
+ ** 			const char *usemsg;
+ ** 		}
+ ** 		getopts_t;
  **
  **   The respective meanings of the different fields are:
  **
- **   optid  a positive number to uniquely identify an entry; a value of zero indicates the last entry in the array
+ **   optid  a positive integer to uniquely identify an entry; a value of zero indicates the last entry in the array
  **   arg  one of OPTARG_NONE, OPTARG_REQUIRED or OPTARG_OPTIONAL to indicate if the option takes an (possibly optional) argument
  **   sopt  a single character constant declaring a short option
  **   lopt  a character string declaring a long option, excluding the "--" prefix
  **   usemsg  a string that can be used to store a human readable textual description of the option
  **
+ **   Either sopt or lopt (but not both at the same time) may be set to
+ **   0 or NULL respectively, to indicate that the short or long variant
+ **   of the option is not available.
+ **
  **   The cb argument is a pointer to a caller supplied function which
  **   is called once for every argument that is processed by the getopts()
- **   function. It shall have a prototype compatible to
+ **   function. It shall have a signature compatible to the prototype
  **
- **     int my_cb( int idx, int id, const char *arg );
+ ** 	int cb( int idx, int id, const char *arg );
  **
- **   @ToDO
+ **   Upon invocation it will receive the following arguments substituted
+ **   for its formal parameters:
+ **
+ **   idx  the index of the argument vector element currently processed.
+ **   id  either a (positive) option ID as defined in odef, or one of OPTERR_END_OF_OPT, OPTERR_UNKNOWN_OPT or OPTERR_MISSING_ARG.
+ **   arg  either the argument provided with an option, or the offending element in the error case.
+ **
+ **   By checking the value of id it is possible to identify, which option
+ **   has been successfully identified, or if an error occurred, or if
+ **   the end-of-options mark "--" has been encountered. The arg parameter
+ **   contains the argument passed along with the option, or the empty
+ **   string if the option did not require an argument (or an optional
+ **   argument was not provided), or the pertaining element itself in
+ **   case an error occurred or the end-of-options marker was hit.
+ **
+ **   If the value returned by cb() is different from zero, option
+ **   processing stops immediately, and the getopts() function itself
+ **   returns this value unaltered.
  **
  ** RETURN VALUE
- **   @ToDO
+ **   The getopts() function always returns the value it received from
+ **   its most recent call to cb().
  **
  ** NOTES
  **   * The usemsg field of an object of type getopts_t is never touched
  **     by the getopts() function.
  **
- **   @ToDO
+ **   * If one is interested in scanning argument vector elements that
+ **     may follow an end-of-options mark ("--"), one may want to save
+ **     the value of idx passed to cb() in a suitable way.
  **
- ** BUGS
- **   @ToDO
+ **   * @TODO: add remark about how optargs are separated from options
  **
  ** EXAMPLE
  **   @ToDO
  **
- **		<TAB indented code>
+ ** 	<TAB indented code>
  **
  ** SEE ALSO
  **   getopts_h(3)
@@ -132,7 +159,7 @@ int getopts( int argc, char *argv[], getopts_t *odef, int (*cb)(int,int,const ch
             {
                 if ( !*++opt )
                 {   /* "--" ends option processing */
-                    r = cb( idx-1, OPTERR_SUCCESS, "--" );
+                    r = cb( idx-1, OPTERR_END_OF_OPT, "--" );
                     break;
                 }
                 /* long option */

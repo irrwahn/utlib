@@ -76,7 +76,7 @@ REGISTER( logging_test )
     log_open( LOG_DEBUG, LOG_TO_FILE, stderr, "log_to_stderr", 0, 0 );
     errno = 0;
     log_xprintf( LOG_DEBUG, "%m\n" );
-#line 80 "logging_test.c"
+#line 80 "extra/logging_test.c"
 
     if ( !err )
         PASS( "logging ok" );
