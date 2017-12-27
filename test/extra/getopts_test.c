@@ -4,7 +4,7 @@
 
 #include <getopts.h>
 
-#include "testsupp.h"
+#include "../testsupp.h"
 
 
 #define MY_OPT_a    101

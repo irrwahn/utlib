@@ -75,8 +75,8 @@ extern "C" {
 
 typedef
     struct getopts_t_struct {
-        unsigned optid;
-        unsigned arg;
+        int optid;
+        int arg;
         char sopt;
         const char *lopt;
         const char *usemsg;
