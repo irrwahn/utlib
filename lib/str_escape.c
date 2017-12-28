@@ -88,7 +88,7 @@ ISO/IEC 9899:201x N1570 p67 defines these escape-sequences:
 #include <inc_priv/baseconv.h>
 
 #define ESC_URL_MASK  0x01
-#define ESC_HEX_MASK  0x02
+#define ESC_NUM_MASK  0x02
 #define ESC_SYM_MASK  0x04
 
 static const unsigned char esc_d[] = {
@@ -104,7 +104,7 @@ static const unsigned char esc_d[] = {
 };
 
 #define ESC_URL(c)  ((c & 0x80) || (esc_d[(c)] & ESC_URL_MASK))
-#define ESC_HEX(c)  ((c & 0x80) || (esc_d[(c)] & ESC_HEX_MASK))
+#define ESC_NUM(c)  ((c & 0x80) || (esc_d[(c)] & ESC_NUM_MASK))
 #define ESC_SYM(c) (!(c & 0x80) && (esc_d[(c)] & ESC_SYM_MASK))
 
 static const char *sym =
@@ -131,11 +131,11 @@ static const char *sym =
  ** DESCRIPTION
  **   The str_escape() function copies characters from the null
  **   terminated source character array s to the destination buf.
- **   For special characters escape sequences are created that
- **   follow the C language rules for string literals. At most
- **   sz bytes are written to buf, which is always null terminated.
- **   The objects pointed to by buf and s, respectively, shall not
- **   overlap.
+ **   For special characters either symbolic or octal escape sequences
+ **   are generated, that follow the C language rules regarding string
+ **   literals. At most sz bytes are written to buf, which is always
+ **   null terminated. The objects pointed to by buf and s,
+ **   respectively, shall not overlap.
  **
  **   The str_urlencode() function works similar, but escapes special
  **   characters according to RFC3986 sect. 2.2, to URL encode
@@ -149,15 +149,12 @@ static const char *sym =
  **   conversion was successful.
  **
  ** NOTES
- **   It is possible for the str_escape() function to produce results
- **   that are technically valid, but will not reproduce the original
- **   string when decoded by str_unescape(3). This happens, when a
- **   produced '\\xHH' sequence is immediately followed by one or more
- **   ordinary characters representing hexadecimal digits, causing
- **   str_unescape(3) to take them as being part of the escape sequence.
- **   This behavior is owed to the problematic grammar production for
- **   hexadecimal escape sequences in the C standard, and not a genuine
- **   bug in str_escape().
+ **   While it would be feasible to generate hexadecimal instead of
+ **   octal escape sequences, that would lead to ambiguous results, and
+ **   it could not be guaranteed that the original string can be
+ **   reconstructed by str_unescape(3). This is due to the problematic
+ **   grammar production for hexadecimal escape sequences in the C
+ **   standard.
  **
  ** SEE ALSO
  **   str_unescape(3), str_urldecode(3)
@@ -182,14 +179,14 @@ size_t str_escape( char *buf, size_t sz, const char *s )
             else
                 n += 2;
         }
-        else if ( ESC_HEX( *p ) )
+        else if ( ESC_NUM( *p ) )
         {
             if ( n + 4 < sz )
             {
                 buf[n++] = '\\';
-                buf[n++] = 'x';
-                buf[n++] = DTOX(*p >> 4);
-                buf[n++] = DTOX(*p);
+                buf[n++] = DTOO(*p >> 6);
+                buf[n++] = DTOO(*p >> 3);
+                buf[n++] = DTOO(*p);
                 e = n;
             }
             else

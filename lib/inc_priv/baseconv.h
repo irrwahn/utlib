@@ -51,6 +51,9 @@ extern "C" {
 /* Convert a single octal digit character to its numerical value. */
 #define OTOD(o)         (is_odigit(o)? (o)-'0': -1)
 
+/* Convert a numerical value between 0 and 7 to a single octal digit. */
+#define DTOO(d) ("01234567"[(d)&0x7])
+
 /* Convert a single hex digit character to its numerical value. */
 #define XTOD(x) \
     ((x)>='0' && (x)<='9'? (x)-'0': \
@@ -58,7 +61,7 @@ extern "C" {
      (x)=='c'||(x)=='C'? 0xc: (x)=='d'||(x)=='D'? 0xd: \
      (x)=='e'||(x)=='E'? 0xe: (x)=='f'||(x)=='F'? 0xf: -1)
 
-/* Convert a numerical value between 0 and 15 to a single hex character. */
+/* Convert a numerical value between 0 and 15 to a single hex digit. */
 #define DTOX(d) ("0123456789ABCDEF"[(d)&0xf])
 
 
