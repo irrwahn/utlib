@@ -6,4 +6,4 @@ TODOs for 0.0.3 milestone
 More outstanding TODOs in no particular order
 ---------------------------------------------
 * Add str_xcpy; str_xcat; etc.
-
+* Fix parallel build.
