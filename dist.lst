@@ -33,14 +33,16 @@ lib/utf8_decode.c
 lib/utf8_decode.h
 lib/utf8_encode.c
 lib/utf8_encode.h
-lib/utf8_locale.c
-lib/utf8_locale.h
 lib/extra/bendian.c
 lib/extra/bendian.h
+lib/extra/getopts.c
+lib/extra/getopts.h
 lib/extra/logging.c
 lib/extra/logging.h
 lib/extra/ntime.c
 lib/extra/ntime.h
+lib/extra/utf8_locale.c
+lib/extra/utf8_locale.h
 test/Makefile
 test/base16_test.c
 test/prng_test.c
@@ -53,5 +55,6 @@ test/testmain.h
 test/testsupp.h
 test/utf8_test.c
 test/extra/bendian_test.c
+test/extra/getopts_test.c
 test/extra/logging_test.c
 test/extra/ntime_test.c

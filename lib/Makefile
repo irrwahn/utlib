@@ -67,7 +67,7 @@ $(ARNAME): $(OBJ) $(SELF)
 $(SONAME_XXX): $(OBJ) $(SELF)
 	$(CCSO) -Wl,-soname,$(SONAME) -o $(SONAME_XXX) $(OBJ)
 
-strip:
+strip: $(ARNAME) $(SONAME_XXX)
 	@echo stripping $(ARNAME)
 	@$(STRIP) $(ARNAME)
 	@[ -f $(SONAME_XXX) ] && echo "stripping $(SONAME_XXX)" && $(STRIP) $(SONAME_XXX) ||:

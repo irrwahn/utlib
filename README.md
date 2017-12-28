@@ -140,7 +140,6 @@ Building utlib under FreeBSD requires the following tools:
 | `install`   | install utlib to prefix     |
 | `uninstall` | remove utlib from prefix    |
 
-*NOTE: Parallel builds are currently broken, this will be fixed in future releases.*
 
 ## Release History
 
@@ -149,6 +148,7 @@ Building utlib under FreeBSD requires the following tools:
 | [0.0.1](https://github.com/irrwahn/utlib/releases/tag/0.0.1) | "For the record"   |
 | [0.0.2](https://github.com/irrwahn/utlib/releases/tag/0.0.2) | "Enter Santa"      |
 | 0.0.3                                                        | (Work in progress) |
+
 
 ## Contributing
 
