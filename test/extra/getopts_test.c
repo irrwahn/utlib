@@ -19,7 +19,7 @@ static getopts_t opts[] = {
     { MY_OPT_c, OPTARG_OPTIONAL, 'c',   NULL,    "blubb" },
     { MY_OPT_d,               0,   0,   "dd",   "sabbel" },
     { MY_OPT_e, OPTARG_OPTIONAL, 'e', "eeee", "salbader" },
-    { 0 }
+    { 0, 0, 0, NULL, NULL }
 };
 
 static int n = 0, pos;

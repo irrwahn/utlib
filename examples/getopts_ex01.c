@@ -7,7 +7,7 @@ static getopts_t opts[] = {
     { 1, OPTARG_REQUIRED, 'x',  "xxx", "" },
     { 2,     OPTARG_NONE,   0, "abcd", "" },
     { 3, OPTARG_OPTIONAL, 'c',     "", "" },
-    { 0 }
+    { 0, 0, 0, NULL, NULL }
 };
 
 static int opt_cb( int idx, int id, const char *arg )
