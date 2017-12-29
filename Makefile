@@ -86,8 +86,6 @@ install: lib doc
 	@echo Installing to $(INST_PREFIX) ...
 	$(MAKE) -C $(LIBDIR) $@
 	$(MAKE) -C $(DOCDIR) $@
-	$(MAKE) -C $(TSTDIR) $@
-	$(MAKE) -C $(EXDIR) $@
 	@echo Installing extra documents ...
 	@$(MKDIR) $(INST_DOCDIR) && for f in $(DOCX); do $(CPV) $$f $(INST_DOCDIR) ; done ||:
 
@@ -95,8 +93,6 @@ uninstall:
 	@echo Uninstalling from $(INST_PREFIX) ...
 	$(MAKE) -C $(LIBDIR) $@
 	$(MAKE) -C $(DOCDIR) $@
-	$(MAKE) -C $(TSTDIR) $@
-	$(MAKE) -C $(EXDIR) $@
 	@echo Removing extra documents ...
 	@cd $(INST_DOCDIR) && for f in $(DOCX); do $(RMV) $$f ; done && $(RMDIR) $(INST_DOCDIR) ||:
 
@@ -122,7 +118,7 @@ $(BLDCFG) config:
 	@echo "Generated $(BLDCFG)"
 
 ifneq ($(MAKECMDGOALS),config)
-include $(BLDCFG)
+  include $(BLDCFG)
 endif
 
 # Handy hack: Get the value of any makefile variable by executing 'make print-VARIABLE_NAME'

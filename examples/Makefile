@@ -34,7 +34,7 @@
 
 
 ifneq ($(MAKE_DEPTH),1)
-    $(error This Makefile must not be run on its own!)
+  $(error This Makefile must not be run on its own!)
 endif
 
 SELF  := $(lastword $(MAKEFILE_LIST))
@@ -47,12 +47,6 @@ examples: $(BIN)
 %: %.c $(SELF)
 	$(CC) $(CFLAGS) -I$(LIBDIR) -I$(LIBDIR)/extra -L$(LIBDIR) -o $* $*.c -lut
 
-install:
-	@echo "TODO: install"
-
-uninstall:
-	@echo "TODO: uninstall"
-
 clean:
 	$(RM) $(BIN) *.o *.d
 
@@ -60,6 +54,6 @@ distclean: clean
 
 -include $(DEP)
 
-.PHONY: examples install uninstall clean distclean
+.PHONY: examples clean distclean
 
 ## EOF

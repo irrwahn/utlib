@@ -34,7 +34,7 @@
 
 
 ifneq ($(MAKE_DEPTH),1)
-    $(error This Makefile must not be run on its own!)
+  $(error This Makefile must not be run on its own!)
 endif
 
 ARNAME     := $(LIBNAME).a
@@ -47,8 +47,8 @@ SELF  := $(lastword $(MAKEFILE_LIST))
 SRC   := $(wildcard *.c)
 HDR   := $(wildcard *.h)
 ifneq ($(BUILD_XTRA),0)
-    SRC   += $(wildcard extra/*.c)
-    HDR   += $(wildcard extra/*.h)
+  SRC   += $(wildcard extra/*.c)
+  HDR   += $(wildcard extra/*.h)
 endif
 OBJ   := $(SRC:%.c=%.o)
 DEP   := $(OBJ:%.o=%.d)
@@ -57,7 +57,7 @@ STR_H := str_all.h
 
 release debug: version $(ARNAME)
 ifneq ($(BUILD_SO),0)
-    release debug: $(SONAME_XXX)
+  release debug: $(SONAME_XXX)
 endif
 release: strip
 
@@ -67,7 +67,10 @@ $(ARNAME): $(OBJ) $(SELF)
 $(SONAME_XXX): $(OBJ) $(SELF)
 	$(CCSO) -Wl,-soname,$(SONAME) -o $(SONAME_XXX) $(OBJ)
 
-strip: $(ARNAME) $(SONAME_XXX)
+ifneq ($(BUILD_SO),0)
+  strip: $(SONAME_XXX)
+endif
+strip: $(ARNAME)
 	@echo stripping $(ARNAME)
 	@$(STRIP) $(ARNAME)
 	@[ -f $(SONAME_XXX) ] && echo "stripping $(SONAME_XXX)" && $(STRIP) $(SONAME_XXX) ||:
@@ -98,7 +101,7 @@ $(STR_H): $(SELF)
 
 install: inst_hdr inst_ar
 ifneq ($(BUILD_SO),0)
-    install: inst_so
+  install: inst_so
 endif
 
 inst_hdr:
@@ -113,10 +116,10 @@ inst_so:
 		&& $(LN) $(SONAME_XXX) $(INST_LIBDIR)/$(SONAME)
 
 uninstall:
-	@$(foreach H,$(HDR),$(RMV) $(INST_INCDIR)/$(H) ||:;)
-	@$(RMDIR) $(INST_INCDIR) ||:
+	@for h in $(HDR) ; do $(RMV) "$(INST_INCDIR)/$h" ; done ||:
+	@$(RMDIR) $(INST_INCDIR) 2> /dev/null ||:
 	@$(RMV) $(INST_LIBDIR)/$(SONAME) $(INST_LIBDIR)/$(SONAME_X) \
-		$(INST_LIBDIR)/$(SONAME_XXX) $(INST_LIBDIR)/$(ARNAME)
+		$(INST_LIBDIR)/$(SONAME_XXX) $(INST_LIBDIR)/$(ARNAME) ||:
 	@$(RMDIR) $(INST_LIBDIR) ||:
 
 clean:

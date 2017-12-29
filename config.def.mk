@@ -10,9 +10,9 @@
 
 # Build type (release, debug) specific library configuration flags.
 # Valid flags include:
-#   -DWITHOUT_SYSLOG		build logging.c without syslog() support
-#   -DWITHOUT_OWN_VSYSLOG	rely on system's vsyslog() in logging.c
-#   -DWITH_PTHREAD			use pthread mutexes in logging.c
+#   -DWITHOUT_SYSLOG        build logging.c without syslog() support
+#   -DWITHOUT_OWN_VSYSLOG   rely on system's vsyslog() in logging.c
+#   -DWITH_PTHREAD          use pthread mutexes in logging.c
 export RLS_OPT := -DWITH_PTHREAD
 export DBG_OPT := -DWITH_PTHREAD
 
@@ -43,10 +43,10 @@ export CRFLAGS := -O2 -DNDEBUG
 export CDFLAGS := -O0 -DDEBUG -g3 -pg -ggdb
 export CSFLAGS := -I.
 ifneq ($(BUILD_XTRA),0)
-    export CSFLAGS += -I./extra
+  export CSFLAGS += -I./extra
 endif
 ifneq ($(BUILD_SO),0)
-    export CSFLAGS += -fPIC
+  export CSFLAGS += -fPIC
 endif
 
 # Generic tool shorts:
@@ -69,15 +69,15 @@ export GZIP_C  := gzip -c
 export GZIP_CV := gzip -cv
 UNAME_S:=$(strip $(shell uname -s 2> /dev/null))
 ifeq ($(UNAME_S),FreeBSD)
-    export TAR := gtar
-    export AWK := gawk
-    export SED := gsed
-    export MAN_L := false
+  export TAR := gtar
+  export AWK := gawk
+  export SED := gsed
+  export MAN_L := false
 else
-    export TAR := tar
-    export AWK := awk
-    export SED := sed
-    export MAN_L := man -l
+  export TAR := tar
+  export AWK := awk
+  export SED := sed
+  export MAN_L := man -l
 endif
 
 # EOF

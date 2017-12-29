@@ -34,7 +34,7 @@
 
 
 ifneq ($(MAKE_DEPTH),1)
-    $(error This Makefile must not be run on its own!)
+  $(error This Makefile must not be run on its own!)
 endif
 
 SELF  := $(lastword $(MAKEFILE_LIST))
@@ -44,8 +44,8 @@ ORGF  := $(wildcard *.t)
 CHSRC  = $(wildcard $(LIBDIR)/*.c)
 CHSRC  += $(subst $(LIBDIR)/str_all.h,,$(subst $(LIBDIR)/version.h,,$(wildcard $(LIBDIR)/*.h)))
 ifneq ($(BUILD_XTRA),0)
-    CHSRC += $(wildcard $(LIBDIR)/extra/*.c)
-    CHSRC += $(wildcard $(LIBDIR)/extra/*.h)
+  CHSRC += $(wildcard $(LIBDIR)/extra/*.c)
+  CHSRC += $(wildcard $(LIBDIR)/extra/*.h)
 endif
 RAWF  = $(wildcard *.tx_)
 TXTF  = $(RAWF:%.tx_=%.txt) $(ORGF:%.t=%.txt)
@@ -72,12 +72,12 @@ $(GENMK): $(CHSRC) $(SELF)
 # generate pretty-printed .txt files from those man pages, or just copy
 # the .tx_ to .txt as a last ditch effort.
 	@t=$*.tx_ ; \
-	    TIT=$$(echo $$t | $(CUT) -d. -f1) && SECT=$$(echo $$t | $(CUT) -d. -f2) \
-	    && MAN=$$TIT.$$SECT && TIT=$$(echo $$TIT | $(SED) 's/.*/\U&/') \
-	    && $(TXT2MAN) -t$$TIT -r$(PROJECT) -s$$SECT -v'$(DOCNAME)' $$t > $$MAN \
-	    && echo -n ", convert to $$MAN"; \
-	    ( MANWIDTH=78 $(MAN_L) $$MAN > "$$MAN.txt" && echo ", generate $$MAN.txt" ) \
-	    || ( echo ", copy to $$MAN.txt" && $(CP) $*.tx_ $*.txt )
+		TIT=$$(echo $$t | $(CUT) -d. -f1) && SECT=$$(echo $$t | $(CUT) -d. -f2) \
+		&& MAN=$$TIT.$$SECT && TIT=$$(echo $$TIT | $(SED) 's/.*/\U&/') \
+		&& $(TXT2MAN) -t$$TIT -r$(PROJECT) -s$$SECT -v'$(DOCNAME)' $$t > $$MAN \
+		&& echo -n ", convert to $$MAN"; \
+		( MANWIDTH=78 $(MAN_L) $$MAN > "$$MAN.txt" && echo ", generate $$MAN.txt" ) \
+		|| ( echo ", copy to $$MAN.txt" && $(CP) $*.tx_ $*.txt )
 
 install:
 	@echo Installing compressed man pages ...
@@ -97,7 +97,7 @@ clean:
 distclean: clean
 
 ifeq ($(MAKECMDGOALS),doc)
--include $(GENMK)
+  -include $(GENMK)
 endif
 
 .PHONY: doc gen install uninstall clean distclean

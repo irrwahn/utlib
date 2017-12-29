@@ -34,7 +34,7 @@
 
 
 ifneq ($(MAKE_DEPTH),1)
-    $(error This Makefile must not be run on its own!)
+  $(error This Makefile must not be run on its own!)
 endif
 
 ARNAME     := $(LIBNAME).a
@@ -47,8 +47,8 @@ SELF  := $(lastword $(MAKEFILE_LIST))
 SRC   := $(wildcard *.c)
 HDR   := $(wildcard *.h)
 ifneq ($(BUILD_XTRA),0)
-    SRC   += $(wildcard extra/*.c)
-    HDR   += $(wildcard extra/*.h)
+  SRC   += $(wildcard extra/*.c)
+  HDR   += $(wildcard extra/*.h)
 endif
 OBJ   := $(SRC:%.c=%.o)
 DEP   := $(OBJ:%.o=%.d)
@@ -71,12 +71,6 @@ $(TST_H): $(SRC) $(SELF)
 	@for f in $(SRC); do echo "  $$f"; $(GREP) -o -E 'REGISTER *\( *([^ ]+) *\)' $$f >> $(TST_H); done ||:
 	@echo Generated $(TST_H)
 
-install:
-	@echo "TODO: install"
-
-uninstall:
-	@echo "TODO: uninstall"
-
 clean:
 	$(RM) $(BIN) $(TST_H) *.o *.d extra/*.o extra/*.d
 
@@ -84,6 +78,6 @@ distclean: clean
 
 -include $(DEP)
 
-.PHONY: test install uninstall clean distclean
+.PHONY: test clean distclean
 
 ## EOF
