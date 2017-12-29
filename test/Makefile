@@ -62,13 +62,16 @@ test: $(BIN)
 $(BIN): $(TST_H) $(OBJ) $(SELF)
 	$(LD) -L$(LIBDIR) -o$(BIN) $(OBJ) -lut
 
+testmain.o: $(TST_H) $(SELF)
+	$(CC) -c $(CFLAGS) -I$(LIBDIR) -I$(LIBDIR)/extra -o $*.o $*.c
+
 %.o: %.c $(SELF)
 	$(CC) -c $(CFLAGS) -I$(LIBDIR) -I$(LIBDIR)/extra -o $*.o $*.c
 
 $(TST_H): $(SRC) $(SELF)
 	@echo "Collecting test modules ..."
 	@echo "/* Generated file, do not edit! */" > $(TST_H)
-	@for f in $(SRC); do echo "  $$f"; $(GREP) -o -E 'REGISTER *\( *([^ ]+) *\)' $$f >> $(TST_H); done ||:
+	@for f in $(SRC); do echo "  $$f"; $(GREP) -o -E 'REGISTER *\( *([^ ]+) *\)' $$f >> $(TST_H); done
 	@echo Generated $(TST_H)
 
 clean:

@@ -45,7 +45,7 @@
 
 #include "../testsupp.h"
 
-REGISTER( ntime )
+REGISTER( ntime_test )
 {
     int err = 0;
     const ntime_t ec = -1;

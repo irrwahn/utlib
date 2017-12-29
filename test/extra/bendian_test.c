@@ -56,7 +56,7 @@ static const union {
     .b = { 0xa5, 0xc3, 0xd0, 0x1f, 0xbe, 0x29, 0x47, 0x68 },
 };
 
-REGISTER( bendian )
+REGISTER( bendian_test )
 {
     int err = 0;
     int isbe = ( u.u16 == U16 && u.u32 == U32 && u.u64 == U64 );
