@@ -59,10 +59,10 @@ static const union {
 REGISTER( bendian_test )
 {
     int err = 0;
-    int isbe = ( u.u16 == U16 && u.u32 == U32 && u.u64 == U64 );
+    int isle = ( u.u16 != U16 && u.u32 != U32 && u.u64 != U64 );
 
-    MESG( "System is %s ENDIAN.", isbe ? "BIG" : "LITTLE" );
-    if ( !isbe )
+    MESG( "Target system appears to be %s ENDIAN.", isle ? "LITTLE" : "BIG" );
+    if ( isle )
     {
         if ( letoh16(u.u16) != U16n || letoh32(u.u32) != U32n || letoh64(u.u64) != U64n )
             { ++err; FAIL( "letohNN()" ); }
