@@ -71,7 +71,7 @@ testmain.o: $(TST_H) $(SELF)
 $(TST_H): $(SRC) $(SELF)
 	@echo "Collecting test modules ..."
 	@echo "/* Generated file, do not edit! */" > $(TST_H)
-	@for f in $(SRC); do echo "  $$f"; $(GREP) -o -E 'REGISTER *\( *([^ ]+) *\)' $$f >> $(TST_H); done
+	@for f in $(SRC); do echo "  $$f"; $(GREP) -o -E 'REGISTER *\( *([^ ]+) *\)' $$f >> $(TST_H); done ||:
 	@echo Generated $(TST_H)
 
 clean:
