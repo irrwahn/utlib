@@ -58,12 +58,14 @@ BLDCFG  := config.mk
 DEFCFG  := config.def.mk
 DOCX    := BUGS CREDITS LICENSE README.md TODO
 
-all: lib doc test
+ifneq ($(MAKECMDGOALS),config)
+  include $(BLDCFG)
+endif
 
-lib: release
+all: lib doc
 
-release: CFLAGS += $(CRFLAGS) $(RLS_OPT)
-debug:   CFLAGS += $(CDFLAGS) $(DBG_OPT)
+lib: $(BUILD_TARGET)
+
 release debug:
 	@echo $@ build, version [$($(PROJECT)_VERSION)], revision [$($(PROJECT)_REVISION)]
 	$(MAKE) -C $(LIBDIR) $@

@@ -60,7 +60,7 @@ test: $(BIN)
 	@./$(BIN)
 
 $(BIN): $(TST_H) $(OBJ) $(SELF)
-	$(LD) -L$(LIBDIR) -o$(BIN) $(OBJ) -lut
+	$(LD) $(LDFLAGS) -L$(LIBDIR) -o$(BIN) $(OBJ) -lut
 
 testmain.o: $(TST_H) $(SELF)
 	$(CC) -c $(CFLAGS) -I$(LIBDIR) -I$(LIBDIR)/extra -o $*.o $*.c

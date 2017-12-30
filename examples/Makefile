@@ -45,7 +45,7 @@ DEP   := $(BIN:%=%.d)
 examples: $(BIN)
 
 %: %.c $(SELF)
-	$(CC) $(CFLAGS) -I$(LIBDIR) -I$(LIBDIR)/extra -L$(LIBDIR) -o $* $*.c -lut
+	$(CC) $(CFLAGS) $(LDFLAGS) -I$(LIBDIR) -I$(LIBDIR)/extra -L$(LIBDIR) -o $* $*.c -lut
 
 clean:
 	$(RM) $(BIN) *.o *.d

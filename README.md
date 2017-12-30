@@ -128,16 +128,14 @@ Building utlib under FreeBSD requires the following tools:
 
 | Target      | Effect                      |
 |-------------|-----------------------------|
-| `all`       | build everything            |
+| `all`       | build library and docs      |
 | `config`    | (re-)create `config.mk`     |
-| `debug`     | build debug library         |
-| `doc`       | build documentation         |
-| `release`   | build release library       |
+| `doc`       | build only documentation    |
 | `test`      | build and run tests         |
 | `clean`     | remove build artifacts      |
 | `distclean` | remove even `config.mk`     |
 | `examples`  | build example programs      |
-| `lib`       | same as `release`           |
+| `lib`       | build only library          |
 | `tarball`   | create distribution archive |
 | `install`   | install utlib to prefix     |
 | `uninstall` | remove utlib from prefix    |
@@ -149,7 +147,7 @@ Building utlib under FreeBSD requires the following tools:
 |--------------------------------------------------------------|--------------------|
 | [0.0.1](https://github.com/irrwahn/utlib/releases/tag/0.0.1) | "For the record"   |
 | [0.0.2](https://github.com/irrwahn/utlib/releases/tag/0.0.2) | "Enter Santa"      |
-| 0.0.3                                                        | (Work in progress) |
+| [0.0.3](https://github.com/irrwahn/utlib/releases/tag/0.0.3) | "Happy 12018"      |
 
 
 ## Contributing

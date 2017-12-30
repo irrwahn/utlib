@@ -22,6 +22,9 @@ export BUILD_XTRA := 1
 # Set this to 0 to build only the static library:
 export BUILD_SO := 1
 
+# Set this to either 'release' or 'debug':
+export BUILD_TARGET := release
+
 # Default install directories:
 export INST_PREFIX ?= /usr/local
 export INST_LIBDIR := $(INST_PREFIX)/lib/utlib
@@ -42,11 +45,18 @@ export CFLAGS  := -std=c99 -pedantic -Wall -Wextra -fstrict-aliasing -MMD -MP
 export CRFLAGS := -O2 -DNDEBUG
 export CDFLAGS := -O0 -DDEBUG -g3 -pg -ggdb
 export CSFLAGS := -I.
+export LDFLAGS :=
+
 ifneq ($(BUILD_XTRA),0)
   export CSFLAGS += -I./extra
 endif
 ifneq ($(BUILD_SO),0)
   export CSFLAGS += -fPIC
+endif
+ifeq ($(BUILD_TARGET),release)
+  CFLAGS += $(CRFLAGS) $(RLS_OPT)
+else
+  CFLAGS += $(CDFLAGS) $(DBG_OPT)
 endif
 
 # Generic tool shorts:
