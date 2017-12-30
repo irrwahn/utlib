@@ -69,8 +69,8 @@ $(GENMK): $(CHSRC) $(SELF)
 # Remove comment remnants from .tx_ files.
 	@t=$*.tx_ ; echo -n "  fix up $$t" ; $(SED) -i -E 's/^ \*\*( |$$)//' $$t
 # If possible, run .tx_ files through txt2man to produce manpages and
-# generate pretty-printed .txt files from those man pages, or just copy
-# the .tx_ to .txt as a last ditch effort.
+# generate pretty-printed .txt files from those man pages, or else simply
+# copy the .tx_ to .txt as a last ditch effort.
 	@t=$*.tx_ ; \
 		TIT=$$(echo $$t | $(CUT) -d. -f1) && SECT=$$(echo $$t | $(CUT) -d. -f2) \
 		&& MAN=$$TIT.$$SECT && TIT=$$(echo $$TIT | $(SED) 's/.*/\U&/') \

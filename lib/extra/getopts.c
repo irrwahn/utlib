@@ -198,7 +198,7 @@
  ** 	        printf( "unrecognized option %s\n", arg );
  ** 	        break;
  ** 	    case OPTERR_MISSING_ARG:
- ** 	        printf( "missing arg ument for option %s\n", arg );
+ ** 	        printf( "missing argument for option %s\n", arg );
  ** 	        break;
  ** 	    case 1:
  ** 	    case 2:

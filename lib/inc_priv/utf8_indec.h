@@ -73,8 +73,8 @@ extern "C" {
 #define UTF8_REJECT 12
 
 static const uint8_t utf8d[] = {
-    /* The first part of the table maps bytes to character classes
-       to reduce the size of the transition table and create bitmasks. */
+    /* The first part of the table maps bytes to character classes to
+       reduce the size of the transition table and create bit masks. */
      0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
      0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
      0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

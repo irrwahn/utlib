@@ -53,7 +53,7 @@
  ** DESCRIPTION
  **   The b16_encode() function stores len bytes from s into buf, in
  **   their respective hexadecimal character representation. At most
- **   sz bytes are placed in buf, which is always nullterminated.
+ **   sz bytes are placed in buf, which is always null terminated.
  **   The objects pointed to by buf and s shall not overlap.
  **
  ** RETURN VALUE

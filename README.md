@@ -82,8 +82,8 @@ both a static library as well as a shared object.
 
 **NOTE:** If the BUILD_XTRA variable is set to 0 in config.mk, the
 following modules will be excluded from the build: `bendian.h`,
-getopts.h, `logging.h`, `ntime.h`, `utf8_locale.h`. This may aid in
-building the remaining modules for freestanding (non-hosted)
+`getopts.h`, `logging.h`, `ntime.h`, `utf8_locale.h`. This may aid
+in building the remaining modules for freestanding (non-hosted)
 implementations.
 
 ### Linux

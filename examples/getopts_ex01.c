@@ -26,7 +26,7 @@ static int opt_cb( int idx, int id, const char *arg )
         printf( "unrecognized option %s\n", arg );
         break;
     case OPTERR_MISSING_ARG:
-        printf( "missing arg ument for option %s\n", arg );
+        printf( "missing argument for option %s\n", arg );
         break;
     case 1:
     case 2:
@@ -35,7 +35,8 @@ static int opt_cb( int idx, int id, const char *arg )
             arg&&*arg?", optarg=":"", arg&&*arg?arg:"" );
         break;
     default:
-        break;  // unreachable
+        /* unreachable */
+        break;
     }
     return 0;
 }
@@ -44,7 +45,7 @@ int main( int argc, char *argv[] )
 {
     int r = getopts( argc, argv, opts, opt_cb );
     printf( "getopts() returned %d\n", r );
-    // Print remaining arguments, if any:
+    /* Print remaining arguments, if any: */
     for ( int i = optind; i < argc; ++i )
         printf( "cmdline arg #%d: %s\n", i, argv[i] );
     return 0;

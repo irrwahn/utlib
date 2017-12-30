@@ -19,7 +19,7 @@ export DBG_OPT := -DWITH_PTHREAD
 # Set this to 0 to exclude the more demanding parts:
 export BUILD_XTRA := 1
 
-# Set this to 0 to build the static library only:
+# Set this to 0 to build only the static library:
 export BUILD_SO := 1
 
 # Default install directories:

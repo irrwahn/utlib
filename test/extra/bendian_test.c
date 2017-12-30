@@ -45,8 +45,8 @@
 #define U64  0xa5c3d01fbe294768ULL
 #define U64n 0x684729be1fd0c3a5ULL
 
-/* This is not sanctioned by ISO C, but most compilers
-   should do the sensible thing.  We Take a chance! */
+/* Strictly speaking, this is not sanctioned by ISO C, but most
+   compilers should do the sensible thing.  We Take a chance! */
 static const union {
     uint8_t b[8];
     uint16_t u16;

@@ -14,11 +14,11 @@
 #define MY_OPT_e    105
 
 static getopts_t opts[] = {
-    { MY_OPT_a, OPTARG_REQUIRED, 'a',  "aaa",    "laber" },
-    { MY_OPT_b,               0, 'b',  "bbb",  "schwall" },
-    { MY_OPT_c, OPTARG_OPTIONAL, 'c',   NULL,    "blubb" },
-    { MY_OPT_d,               0,   0,   "dd",   "sabbel" },
-    { MY_OPT_e, OPTARG_OPTIONAL, 'e', "eeee", "salbader" },
+    { MY_OPT_a, OPTARG_REQUIRED, 'a',  "aaa",  "foo" },
+    { MY_OPT_b,               0, 'b',  "bbb",  "bar" },
+    { MY_OPT_c, OPTARG_OPTIONAL, 'c',   NULL,  "baz" },
+    { MY_OPT_d,               0,   0,   "dd",  "qux" },
+    { MY_OPT_e, OPTARG_OPTIONAL, 'e', "eeee", "quuz" },
     { 0, 0, 0, NULL, NULL }
 };
 
