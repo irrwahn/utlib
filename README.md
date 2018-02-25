@@ -7,16 +7,17 @@ A collection of various utility functions, implemented in C.
 
 ### General
 
-The utlib library is a collection of loosely related simple utility
-functions addressing several fields of application, ranging from
-basic string manipulation, random number generation and byte order
-conversion, up to high resolution scalar time handling.
+The utlib library is a collection of simple utility functions
+addressing several fields of application, ranging from basic
+string manipulation, random number generation and byte order
+conversion to high resolution scalar time handling.
 
-Utlib is designed to depend as little as possible on operating system
-specifics, stick to ISO C as far as feasible and resort to POSIX
-functionality where necessary. It should work with little or no
-tweaking on most modern Linux and BSD distributions, so far it is
-however only known to work with Debian GNU/Linux and FreeBSD.
+Utlib is designed to depend as little as possible on operating
+system specifics, stick to ISO C as close as feasible and only
+resort to POSIX functionality where necessary. It should build and
+work with little or no tweaking on most modern Linux and BSD
+distributions. So far it has however only been tested on Debian-like
+GNU/Linux and FreeBSD systems.
 
 
 ### Motivation
@@ -143,11 +144,11 @@ Building utlib under FreeBSD requires the following tools:
 
 ## Release History
 
-| Version                                                      | Comment            |
-|--------------------------------------------------------------|--------------------|
-| [0.0.1](https://github.com/irrwahn/utlib/releases/tag/0.0.1) | "For the record"   |
-| [0.0.2](https://github.com/irrwahn/utlib/releases/tag/0.0.2) | "Enter Santa"      |
-| [0.0.3](https://github.com/irrwahn/utlib/releases/tag/0.0.3) | "Happy 12018"      |
+| Version                                                      | Comment               |
+|--------------------------------------------------------------|-----------------------|
+| [0.0.1](https://github.com/irrwahn/utlib/releases/tag/0.0.1) | "For the record"      |
+| [0.0.2](https://github.com/irrwahn/utlib/releases/tag/0.0.2) | "Enter Santa"         |
+| [0.0.3](https://github.com/irrwahn/utlib/releases/tag/0.0.3) | "Happy 12018"* (sic!)*|
 
 
 ## Contributing
