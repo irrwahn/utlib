@@ -63,7 +63,7 @@
 #ifndef UTF8_DECODE_H_INLCLUDED
 #define UTF8_DECODE_H_INLCLUDED
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -84,7 +84,7 @@ extern size_t utf8_mem_decode( uint32_t *buf, size_t max, void *s, size_t size, 
 extern size_t utf8_stream_decode( int(*get)(void*), int(*put)(uint32_t,void*), void *usr, size_t *errcnt );
 
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 } /* extern "C" { */
 #endif
 

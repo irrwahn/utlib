@@ -54,7 +54,7 @@
 #ifndef UTF8_LOCALE_H_INLCLUDED
 #define UTF8_LOCALE_H_INLCLUDED
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -62,7 +62,7 @@ extern "C" {
 int locale_is_utf8( const char *locale );
 
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 } /* extern "C" { */
 #endif
 

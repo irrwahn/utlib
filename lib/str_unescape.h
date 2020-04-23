@@ -53,7 +53,7 @@
 #ifndef STR_UNESCAPE_H_INCLUDED
 #define STR_UNESCAPE_H_INCLUDED
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -62,7 +62,7 @@ extern "C" {
 extern size_t str_unescape( char *buf, size_t sz, const char *s, size_t *errcnt );
 extern size_t str_urldecode( char *buf, size_t sz, const char *s, size_t *errcnt );
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 } /* extern "C" */
 #endif
 

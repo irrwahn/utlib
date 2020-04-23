@@ -60,7 +60,7 @@
 #ifndef STR_TRIM_H_INCLUDED
 #define STR_TRIM_H_INCLUDED
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -73,7 +73,7 @@ extern char *str_trim( char *s );
 extern const char *str_skipspace( const char *s );
 extern const char *str_skip( const char *s, const char *skipset );
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 } /* extern "C" */
 #endif
 

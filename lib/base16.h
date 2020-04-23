@@ -55,7 +55,7 @@
 #ifndef BASE16_H_INCLUDED
 #define BASE16_H_INCLUDED
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -65,7 +65,7 @@ extern size_t b16_encode( char *buf, size_t sz, const void *s, size_t len );
 extern int b16_decode( char *buf, size_t sz, const void *s, size_t len, size_t *errcnt );
 
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 } /* extern "C" { */
 #endif
 

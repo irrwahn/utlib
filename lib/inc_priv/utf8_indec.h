@@ -63,7 +63,7 @@
 #ifndef UTF8_INDEC_H_INCLUDED
 #define UTF8_INDEC_H_INCLUDED
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -103,7 +103,7 @@ static inline int utf8_c( uint8_t b, int st, uint32_t *cp )
 #define utf8_v(b,st)    (utf8d[ 256 + (st) + utf8d[(uint8_t)(b)] ])
 
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 } /* extern "C" */
 #endif
 

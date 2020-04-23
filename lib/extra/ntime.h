@@ -72,7 +72,7 @@
 #ifndef NTIME_H_INCLUDED
 #define NTIME_H_INCLUDED
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -121,7 +121,7 @@ extern ntime_t nclock_get( void );
 extern ntime_t nclock_res( void );
 
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 } /* extern "C" { */
 #endif
 

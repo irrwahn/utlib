@@ -60,7 +60,7 @@
 #ifndef UTF8_INENC_H_INCLUDED
 #define UTF8_INENC_H_INCLUDED
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -107,7 +107,7 @@ static inline int utf8_ec( uint32_t cp, uint8_t *b )
   (((uint32_t)(c))<0x110000)?4:0)
 
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 } /* extern "C" */
 #endif
 

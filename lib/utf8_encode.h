@@ -57,7 +57,7 @@
 #ifndef UTF8_ENCODE_H_INLCLUDED
 #define UTF8_ENCODE_H_INLCLUDED
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -72,7 +72,7 @@ extern "C" {
 extern size_t utf8_stream_encode( uint32_t(*get)(void*), int(*put)(uint8_t*,int,void*), void *usr, size_t *errcnt );
 
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 } /* extern "C" { */
 #endif
 

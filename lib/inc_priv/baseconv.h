@@ -40,7 +40,7 @@
 #ifndef BASECONV_H_INCLUDED
 #define BASECONV_H_INCLUDED
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -65,7 +65,7 @@ extern "C" {
 #define DTOX(d) ("0123456789ABCDEF"[(d)&0xf])
 
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 } /* extern "C" */
 #endif
 

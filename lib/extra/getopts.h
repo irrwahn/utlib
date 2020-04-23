@@ -61,7 +61,7 @@
 #ifndef GETOPTS_H_INCLUDED
 #define GETOPTS_H_INCLUDED
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -87,7 +87,7 @@ typedef
 extern int getopts( int argc, char *argv[], getopts_t *odef, int (*cb)(int,int,const char *) );
 
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 } /* extern "C" { */
 #endif
 

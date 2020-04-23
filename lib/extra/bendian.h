@@ -124,7 +124,7 @@
 #ifndef BENDIAN_H_INCLUDED
 #define BENDIAN_H_INCLUDED
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -305,7 +305,7 @@ extern uint32_t ntoh32( uint32_t v );
 extern uint64_t ntoh64( uint64_t v );
 
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 } /* extern "C" */
 #endif
 

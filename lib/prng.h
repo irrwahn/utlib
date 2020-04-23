@@ -71,7 +71,7 @@
 #ifndef PRNG_H_INCLUDED
 #define PRNG_H_INCLUDED
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -107,7 +107,7 @@ void prng_srandom( uint64_t seed );
 void prng_srandom_r( prng_random_ctx_t *ctx, uint64_t seed );
 
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 } /* extern "C" { */
 #endif
 

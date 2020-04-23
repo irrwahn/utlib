@@ -53,7 +53,7 @@
 #ifndef STR_ICMP_H_INCLUDED
 #define STR_ICMP_H_INCLUDED
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -62,7 +62,7 @@ extern "C" {
 extern int str_icmp( const char *s1, const char *s2 );
 extern int str_nicmp( const char *s1, const char *s2, size_t n );
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 } /* extern "C" */
 #endif
 
